@@ -108,9 +108,13 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
+exports.Prisma.PortariaOrderByRelevanceFieldEnum = {
+  nome: 'nome',
+  portaria: 'portaria',
+  cpf: 'cpf',
+  cargo: 'cargo',
+  simbolo: 'simbolo',
+  secretaria: 'secretaria'
 };
 
 
@@ -128,7 +132,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\kaio.pimentel\\Desktop\\Automa-o\\backend\\generated\\prisma",
+      "value": "/opt/portaria/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -137,16 +141,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\kaio.pimentel\\Desktop\\Automa-o\\backend\\prisma\\schema.prisma",
+    "sourceFilePath": "/opt/portaria/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../.env",
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../../prisma",
@@ -155,8 +159,7 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "postgresql",
-  "postinstall": false,
+  "activeProvider": "mysql",
   "inlineDatasources": {
     "db": {
       "url": {
@@ -165,8 +168,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Portaria {\n  id         Int      @id @default(autoincrement()) // Adiciona um ID primário\n  nome       String\n  portaria   String\n  cpf        String\n  cargo      String\n  simbolo    String\n  secretaria String\n  data       DateTime // Tipo DateTime é mais apropriado para Prisma\n}\n",
-  "inlineSchemaHash": "2ef5004da064adb69486d709effa2e9d24e3a291102e39829f1c754cc2af7012",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Portaria {\n  id         Int      @id @default(autoincrement()) // Adiciona um ID primário\n  nome       String\n  portaria   String\n  cpf        String\n  cargo      String\n  simbolo    String\n  secretaria String\n  data       DateTime // Tipo DateTime é mais apropriado para Prisma\n}\n",
+  "inlineSchemaHash": "ca61a738f6c8d96babcfbac6ac0a8c22e778dd8358c704c6b912e584a2d96105",
   "copyEngine": true
 }
 config.dirname = '/'

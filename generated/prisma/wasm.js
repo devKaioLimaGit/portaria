@@ -136,9 +136,13 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
+exports.Prisma.PortariaOrderByRelevanceFieldEnum = {
+  nome: 'nome',
+  portaria: 'portaria',
+  cpf: 'cpf',
+  cargo: 'cargo',
+  simbolo: 'simbolo',
+  secretaria: 'secretaria'
 };
 
 
