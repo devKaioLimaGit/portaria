@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Sistema Portaria</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: url('/img/fundo.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header,
+    footer {
+      background: url('/img/fundo.jpg') center/cover no-repeat;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      text-align: center;
+      flex: 1;
+    }
+
+    header img,
+    footer img {
+      height: 50px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #2c3e50;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-group input:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 12px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-login:hover {
+      background-color: #2980b9;
+    }
+
+    footer {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    footer h3 {
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      margin: 0.2rem 0;
+    }
+
+    footer .rights {
+      border-top: 1px solid #fff;
+      margin-top: 1rem;
+      padding-top: 0.5rem;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="/img/sectilogo.png" alt="Logo SECTI">
+    <h1>Sistema Portaria</h1>
+  </header>
+
+  <main>
+    <div class="login-container">
+      <h2>Login</h2>
+      <form action="/authenticate" method="POST">
+        <div class="form-group">
+          <label for="cpf">CPF:</label>
+          <input type="text" id="cpf" name="cpf" maxlength="14" required placeholder="000.000.000-00">
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha" required placeholder="Digite sua senha">
+        </div>
+        <button type="submit" class="btn-login">Entrar</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <img src="/img/sectilogo.png" alt="Logo SECTI">
+    <h3>Secretaria Executiva de Ciência, Tecnologia e Inovação</h3>
+    <p>Endereço: Av. Mal. Floriano Peixoto, Centro, Paulista - PE</p>
+    <p>Telefone: (81) 99635-0311</p>
+    <p>Email: secti@paulista.pe.gov.br</p>
+    <div class="rights">
+      <p>&copy; 2025 Prefeitura Municipal de Paulista - Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+
+</html>

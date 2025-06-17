@@ -35,8 +35,8 @@
         <label for="data-1">Data (Rodapé):</label>
         <input type="date" id="data-1" required />
 
-        <label for="dataHora">Data e Hora (Nomeação):</label>
-        <input type="datetime-local" id="dataHora" required />
+        <label for="data-nomeacao">Data (Nomeação):</label>
+        <input type="date" id="data-nomeacao" name="data-nomeacao" required />
 
         <button type="button" onclick="enviarPortaria()">Baixar DOCX da Prévia</button>
       </form>
@@ -44,7 +44,7 @@
 
     <!-- Prévia -->
     <div class="preview-container" id="preview">
-      <img src="/images/pref.png" alt="Logo da Prefeitura" class="logo-prefeitura" />
+      <img src="/img/pref.png" alt="Logo da Prefeitura" class="logo-prefeitura" />
 
       <p class="center titulo-gabinete"><strong><u>SECRETARIA DE GOVERNO E GABINETE</u></strong></p>
       <p class="center"><strong>PORTARIA Nº <span id="p-portaria">0000</span>/2025</strong></p>
@@ -62,7 +62,7 @@
         sob o CPF nº <span id="p-cpf">xxx.xxx.xxx-xx</span>, para o exercício do cargo de provimento em comissão de
         <strong><span id="p-cargo">CARGO</span></strong>, símbolo “<strong><span id="p-simbolo">CC8</span></strong>”,
         lotado na <strong><span id="p-secretaria">SECRETARIA</span></strong>,
-        a partir da presente data e hora <span id="p-dataHora">01/01/2025 00:00</span>.
+        a partir da presente data <span id="p-data-nomeacao">01/01/2025</span>.
       </p>
 
       <p class="center">Registra-se</p>
@@ -93,10 +93,11 @@
         simbolo: document.getElementById('simbolo').value,
         secretaria: document.getElementById('secretaria').value,
         data: document.getElementById('data-1').value,
-        dataHora: document.getElementById('dataHora').value,
+        dataNomeacao: document.getElementById('data-nomeacao').value,
       };
 
       try {
+        console.log(JSON.stringify(formData))
         const response = await fetch('/portaria', {
           method: 'POST',
           headers: {
@@ -107,7 +108,7 @@
 
         if (!response.ok) {
           const errorData = await response.json();
-          throw new Error( errorData.error || 'Erro ao enviar portaria' );
+          throw new Error(errorData.error || 'Erro ao enviar portaria');
         }
 
         const result = await response.json();
@@ -126,50 +127,39 @@
       return cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, 'xxx.$2.xxx-$4');
     }
 
-    function formatarDataHora(dataHoraInput) {
-      if (!dataHoraInput) return 'DATA E HORA INVÁLIDAS';
-      const data = new Date(dataHoraInput);
-      const dia = String(data.getDate()).padStart(2, '0');
-      const mes = [
-        'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
-        'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
-      ][data.getMonth()];
-      const ano = data.getFullYear();
-      const horas = String(data.getHours()).padStart(2, '0');
-      const minutos = String(data.getMinutes()).padStart(2, '0');
-      return `${dia} de ${mes} de ${ano} ${horas}:${minutos}`;
-    }
-
-    function atualizarDataPrevia(dataInput) {
+    function formatarDataNomeacao(dataInput) {
+      if (!dataInput) return 'DATA INVÁLIDA';
+      const [ano, mes, dia] = dataInput.split('-');
       const meses = [
         'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
         'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
       ];
-      const data = new Date(dataInput);
-      const dia = String(data.getDate()).padStart(2, '0');
-      const mes = meses[data.getMonth()];
-      const ano = data.getFullYear();
-      document.getElementById('p-data').textContent = `Paulista, ${dia} de ${mes} de ${ano}.`;
+      const mesNome = meses[parseInt(mes) - 1];
+      return `${dia} de ${mesNome} de ${ano}`;
+    }
+
+    function atualizarDataPrevia(dataInput) {
+      if (!dataInput) return;
+      const [ano, mes, dia] = dataInput.split('-');
+      const meses = [
+        'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+        'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+      ];
+      const mesNome = meses[parseInt(mes) - 1];
+      document.getElementById('p-data').textContent = `Paulista, ${dia} de ${mesNome} de ${ano}`;
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      const hoje = new Date();
-      const yyyy = hoje.getFullYear();
-      const mm = String(hoje.getMonth() + 1).padStart(2, '0');
-      const dd = String(hoje.getDate()).padStart(2, '0');
-      const hh = String(hoje.getHours()).padStart(2, '0');
-      const min = String(hoje.getMinutes()).padStart(2, '0');
-      const dataFormatada = `${yyyy}-${mm}-${dd}`;
-      const dataHoraFormatada = `${yyyy}-${mm}-${dd}T${hh}:${min}`;
       const inputData = document.getElementById('data-1');
-      const inputDataHora = document.getElementById('dataHora');
-      inputData.value = dataFormatada;
-      inputDataHora.value = dataHoraFormatada;
-      atualizarDataPrevia(dataFormatada);
-      document.getElementById('p-dataHora').textContent = formatarDataHora(dataHoraFormatada);
+      const inputDataNomeacao = document.getElementById('data-nomeacao');
+      // Inicializa com campos vazios
+      inputData.value = '';
+      inputDataNomeacao.value = '';
+      document.getElementById('p-data').textContent = 'Paulista, DATA ATUAL';
+      document.getElementById('p-data-nomeacao').textContent = '01/01/2025';
     });
 
-    const campos = ['nome', 'cpf', 'cargo', 'simbolo', 'secretaria', 'portaria', 'data-1', 'dataHora'];
+    const campos = ['nome', 'cpf', 'cargo', 'simbolo', 'secretaria', 'portaria', 'data-1', 'data-nomeacao'];
     campos.forEach((id) => {
       document.getElementById(id).addEventListener('input', function () {
         const valor = this.value || id.toUpperCase();
@@ -177,8 +167,8 @@
           document.getElementById('p-cpf').textContent = mascararCPF(valor);
         } else if (id === 'data-1') {
           atualizarDataPrevia(valor);
-        } else if (id === 'dataHora') {
-          document.getElementById('p-dataHora').textContent = formatarDataHora(valor);
+        } else if (id === 'data-nomeacao') {
+          document.getElementById('p-data-nomeacao').textContent = formatarDataNomeacao(valor);
         } else {
           document.getElementById('p-' + id).textContent = valor;
         }
@@ -195,7 +185,7 @@
       const simbolo = document.getElementById('p-simbolo').textContent;
       const secretaria = document.getElementById('p-secretaria').textContent;
       const data = document.getElementById('p-data').textContent;
-      const dataHora = document.getElementById('p-dataHora').textContent;
+      const dataNomeacao = document.getElementById('p-data-nomeacao').textContent;
 
       const topMargin = 3 * 567;
       const leftMargin = 3 * 567;
@@ -213,7 +203,7 @@
         }
       }
 
-      const imageBuffer = await getImageArrayBuffer('/images/pref.png');
+      const imageBuffer = await getImageArrayBuffer('/img/pref.png');
 
       const doc = new Document({
         sections: [{
@@ -408,7 +398,7 @@
                   size: 20,
                 }),
                 new TextRun({
-                  text: `, a partir da presente data e hora ${dataHora}.`,
+                  text: `, a partir da presente data ${dataNomeacao}.`,
                   font: { name: 'Times New Roman' },
                   size: 20,
                 }),
@@ -444,7 +434,7 @@
               children: [
                 new TextRun({
                   text: data,
-                  font: { name: 'Times New1 Roman' },
+                  font: { name: 'Times New Roman' },
                   size: 20,
                 }),
               ],
@@ -455,7 +445,7 @@
               alignment: AlignmentType.CENTER,
               children: [
                 new TextRun({
-                  text: "SEVERINO RAMOS DE‌سANTANA",
+                  text: "SEVERINO RAMOS DE SANTANA",
                   bold: true,
                   font: { name: 'Times New Roman' },
                   size: 20,

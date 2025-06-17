@@ -128,7 +128,15 @@ exports.Prisma.PortariaScalarFieldEnum = {
   cargo: 'cargo',
   simbolo: 'simbolo',
   secretaria: 'secretaria',
+  nomeacao: 'nomeacao',
   data: 'data'
+};
+
+exports.Prisma.UsersScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  cpf: 'cpf',
+  password: 'password'
 };
 
 exports.Prisma.SortOrder = {
@@ -145,9 +153,16 @@ exports.Prisma.PortariaOrderByRelevanceFieldEnum = {
   secretaria: 'secretaria'
 };
 
+exports.Prisma.UsersOrderByRelevanceFieldEnum = {
+  nome: 'nome',
+  cpf: 'cpf',
+  password: 'password'
+};
+
 
 exports.Prisma.ModelName = {
-  Portaria: 'Portaria'
+  Portaria: 'Portaria',
+  Users: 'Users'
 };
 
 /**
