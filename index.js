@@ -160,6 +160,11 @@ app.get("/logout", (req, res) => {
     });
 });
 
+app.get("/lista-portaria", async(req,res)=>{
+    const portarias = await prisma.portaria.findMany();
+    res.render("listPortaria.ejs", {portarias})
+});
+
 
 app.post("/user", authenticate, async (req, res) => {
     const { nome, cpf, password } = req.body;

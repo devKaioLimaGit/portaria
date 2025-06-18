@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Portarias</title>
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+        h2 {
+            color: #003087;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #e6f0ff;
+            border: 2px solid #003087;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #003087;
+        }
+        th {
+            background-color: #003087;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #b3d1ff;
+        }
+        tr:hover {
+            background-color: #99c2ff;
+        }
+        .action-btn {
+            padding: 6px 10px;
+            margin: 10px 0px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .edit-btn {
+            background-color: #0040ff;
+            color: white;
+        }
+        .delete-btn {
+            background-color: #ff3333;
+            color: white;
+        }
+        .publish-btn {
+            background-color: #33cc33;
+            color: white;
+        }
+        .dataTables_wrapper .dataTables_filter input {
+            border: 1px solid #003087;
+            padding: 5px;
+            margin-left: 5px;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            background-color: #003087;
+            color: white !important;
+            padding: 5px 10px;
+            margin: 0 2px;
+            border-radius: 3px;
+            text-decoration: none;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background-color: #0040ff;
+        }
+        .dataTables_wrapper .dataTables_length select {
+            border: 1px solid #003087;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Lista de Portarias</h2>
+        <table id="portariaTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Portaria</th>
+                    <th>CPF</th>
+                    <th>Cargo</th>
+                    <th>Símbolo</th>
+                    <th>Secretaria</th>
+                    <th>Nomeação</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% portarias.forEach(portaria => { %>
+                    <tr>
+                        <td><%= portaria.id %></td>
+                        <td><%= portaria.nome %></td>
+                        <td><%= portaria.portaria %></td>
+                        <td><%= portaria.cpf %></td>
+                        <td><%= portaria.cargo %></td>
+                        <td><%= portaria.simbolo %></td>
+                        <td><%= portaria.secretaria %></td>
+                        <td><%= new Date(portaria.nomeacao).toLocaleDateString('pt-BR') %></td>
+                        <td><%= new Date(portaria.data).toLocaleDateString('pt-BR') %></td>
+                        <td>
+                            <a href="/editar-portaria/<%= portaria.id %>" class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="/apagar-portaria/<%= portaria.id %>" class="action-btn delete-btn" 
+                               onclick="return confirm('Tem certeza que deseja apagar?')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <a href="/publicar-portaria/<%= portaria.id %>" class="action-btn publish-btn">
+                                <i class="fas fa-share"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#portariaTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json'
+                },
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50],
+                order: [[0, 'desc']],
+                columnDefs: [
+                    { orderable: false, targets: 9 } // Disable sorting on actions column
+                ]
+            });
+        });
+    </script>
+</body>
+</html>
