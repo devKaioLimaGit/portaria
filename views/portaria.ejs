@@ -12,7 +12,7 @@
   <div class="container">
     <!-- Formulário -->
     <div class="form-container">
-      <h2>Dados da Nomeação</h2>
+      <h2>Dados da Portaria</h2>
       <form id="formulario">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" required />
@@ -29,8 +29,44 @@
         <label for="simbolo">Símbolo:</label>
         <input type="text" id="simbolo" placeholder="Ex: CC8" required />
 
-        <label for="secretaria">Secretaria:</label>
-        <input type="text" id="secretaria" placeholder="Ex: Secretaria de Educação" required />
+<label for="secretaria">Secretaria:</label>
+        <select id="secretaria" required>
+          <option value="" disabled selected>SELECIONE UMA SECRETARIA</option>
+          <option value="CONTROLADORIA GERAL">CONTROLADORIA GERAL</option>
+          <option value="GABINETE DO PREFEITO">GABINETE DO PREFEITO</option>
+          <option value="GABINETE DO VICE-PREFEITO">GABINETE DO VICE-PREFEITO</option>
+          <option value="OUVIDORIA GERAL">OUVIDORIA GERAL</option>
+          <option value="PREVIDÊNCIA MUNICIPAL">PREVIDÊNCIA MUNICIPAL</option>
+          <option value="PROCURADORIA GERAL">PROCURADORIA GERAL</option>
+          <option value="SECRETARIA DE ADMINISTRAÇÃO">SECRETARIA DE ADMINISTRAÇÃO</option>
+          <option value="SECRETARIA DE ADMINISTRAÇÃO DAS REGIONAIS">SECRETARIA DE ADMINISTRAÇÃO DAS REGIONAIS</option>
+          <option value="SECRETARIA DE ASSUNTOS JURÍDICOS">SECRETARIA DE ASSUNTOS JURÍDICOS</option>
+          <option value="SECRETARIA DE DESENVOLVIMENTO ECONÔMICO, AGROPECUÁRIA E PESCA">SECRETARIA DE DESENVOLVIMENTO ECONÔMICO, AGROPECUÁRIA E PESCA</option>
+          <option value="SECRETARIA DE DESENVOLVIMENTO URBANO, TECNOLOGIA">SECRETARIA DE DESENVOLVIMENTO URBANO, TECNOLOGIA</option>
+          <option value="SECRETARIA DE MEIO AMBIENTE">SECRETARIA DE MEIO AMBIENTE</option>
+          <option value="SECRETARIA DE EDUCAÇÃO">SECRETARIA DE EDUCAÇÃO</option>
+          <option value="SECRETARIA DE FINANÇAS">SECRETARIA DE FINANÇAS</option>
+          <option value="SECRETARIA DE GOVERNO E GABINETE">SECRETARIA DE GOVERNO E GABINETE</option>
+          <option value="SECRETARIA DE HABITAÇÃO">SECRETARIA DE HABITAÇÃO</option>
+          <option value="SECRETARIA DE INFRAESTRUTURA">SECRETARIA DE INFRAESTRUTURA</option>
+          <option value="SECRETARIA DE LICITAÇÕES E CONTRATOS">SECRETARIA DE LICITAÇÕES E CONTRATOS</option>
+          <option value="SECRETARIA DE OBRAS E SERVIÇOS PÚBLICOS">SECRETARIA DE OBRAS E SERVIÇOS PÚBLICOS</option>
+          <option value="SECRETARIA DE PLANEJAMENTO E GESTÃO">SECRETARIA DE PLANEJAMENTO E GESTÃO</option>
+          <option value="SECRETARIA DE POLÍTICAS SOCIAIS E DIREITOS HUMANOS">SECRETARIA DE POLÍTICAS SOCIAIS E DIREITOS HUMANOS</option>
+          <option value="SECRETARIA DE PROJETOS ESPECIAIS">SECRETARIA DE PROJETOS ESPECIAIS</option>
+          <option value="SECRETARIA DE SAÚDE">SECRETARIA DE SAÚDE</option>
+          <option value="SECRETARIA DE SEGURANÇA, MOBILIDADE E DEFESA CIVIL">SECRETARIA DE SEGURANÇA, MOBILIDADE E DEFESA CIVIL</option>
+          <option value="SECRETARIA EXECUTIVA DE COMUNICAÇÃO">SECRETARIA EXECUTIVA DE COMUNICAÇÃO</option>
+          <option value="SECRETARIA EXECUTIVA DE GABINETE">SECRETARIA EXECUTIVA DE GABINETE</option>
+          <option value="SECRETARIA EXECUTIVA DE IMPRENSA">SECRETARIA EXECUTIVA DE IMPRENSA</option>
+          <option value="SECRETARIA EXECUTIVA DE POLÍTICAS PARA AS MULHERES">SECRETARIA EXECUTIVA DE POLÍTICAS PARA AS MULHERES</option>
+        </select>
+
+        <label for="tipoDocumento">Tipo de Documento:</label>
+        <select id="tipoDocumento" required>
+          <option value="NOMEAR" selected>NOMEAR</option>
+          <option value="EXONERAR">EXONERAR</option>
+        </select>
 
         <label for="data-1">Data (Rodapé):</label>
         <input type="date" id="data-1" required />
@@ -58,7 +94,7 @@
       <p class="center"><strong>R E S O L V E:</strong></p>
 
       <p>
-        <strong>         NOMEAR</strong> o(a) Sr(a). <strong><span id="p-nome">NOME COMPLETO</span></strong>
+        <strong>         <span id="p-tipoDocumento">NOMEAR</span></strong> o(a) Sr(a). <strong><span id="p-nome">NOME COMPLETO</span></strong>
         sob o CPF nº <span id="p-cpf">xxx.xxx.xxx-xx</span>, para o exercício do cargo de provimento em comissão de
         <strong><span id="p-cargo">CARGO</span></strong>, símbolo “<strong><span id="p-simbolo">CC8</span></strong>”,
         lotado na <strong><span id="p-secretaria">SECRETARIA</span></strong>,
@@ -92,12 +128,13 @@
         cargo: document.getElementById('cargo').value,
         simbolo: document.getElementById('simbolo').value,
         secretaria: document.getElementById('secretaria').value,
+        tipoDocumento: document.getElementById('tipoDocumento').value,
         data: document.getElementById('data-1').value,
         dataNomeacao: document.getElementById('data-nomeacao').value,
       };
 
       try {
-        console.log(JSON.stringify(formData))
+        console.log(JSON.stringify(formData));
         const response = await fetch('/portaria', {
           method: 'POST',
           headers: {
@@ -157,9 +194,10 @@
       inputDataNomeacao.value = '';
       document.getElementById('p-data').textContent = 'Paulista, DATA ATUAL';
       document.getElementById('p-data-nomeacao').textContent = '01/01/2025';
+      document.getElementById('p-tipoDocumento').textContent = 'NOMEAR';
     });
 
-    const campos = ['nome', 'cpf', 'cargo', 'simbolo', 'secretaria', 'portaria', 'data-1', 'data-nomeacao'];
+    const campos = ['nome', 'cpf', 'cargo', 'simbolo', 'secretaria', 'portaria', 'tipoDocumento', 'data-1', 'data-nomeacao'];
     campos.forEach((id) => {
       document.getElementById(id).addEventListener('input', function () {
         const valor = this.value || id.toUpperCase();
@@ -169,6 +207,8 @@
           atualizarDataPrevia(valor);
         } else if (id === 'data-nomeacao') {
           document.getElementById('p-data-nomeacao').textContent = formatarDataNomeacao(valor);
+        } else if (id === 'tipoDocumento') {
+          document.getElementById('p-tipoDocumento').textContent = valor;
         } else {
           document.getElementById('p-' + id).textContent = valor;
         }
@@ -184,6 +224,7 @@
       const cargo = document.getElementById('p-cargo').textContent;
       const simbolo = document.getElementById('p-simbolo').textContent;
       const secretaria = document.getElementById('p-secretaria').textContent;
+      const tipoDocumento = document.getElementById('p-tipoDocumento').textContent;
       const data = document.getElementById('p-data').textContent;
       const dataNomeacao = document.getElementById('p-data-nomeacao').textContent;
 
@@ -348,7 +389,7 @@
               indent: { left: 720 },
               children: [
                 new TextRun({
-                  text: "\tNOMEAR ",
+                  text: `\t${tipoDocumento} `,
                   bold: true,
                   font: { name: 'Times New Roman' },
                   size: 20,

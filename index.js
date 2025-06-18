@@ -2,34 +2,31 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const path = require("path");
-const { hash, compare } = require("bcryptjs")
-const { PrismaClient } = require("./generated/prisma");
+const { hash, compare } = require("bcryptjs");
 const session = require('express-session');
-const authenticate = require("./middlewares/authenticate")
+const authenticate = require("./middlewares/authenticate");
+const { PrismaClient } = require("./generated/prisma");
 const prisma = new PrismaClient();
 
 app.use(cors());
 
 app.use(session({
-  secret: "K_*&$lpUTR@!çPÇ0524.nup",
-  cookie: { maxAge: 1800000 }
+    secret: "K_*&$lpUTR@!çPÇ0524.nup",
+    cookie: { maxAge: 1800000 }
 }));
 
 
 
-app.use(express.static('public')); // Se as pastas css e images estiverem em public/
+app.use(express.static('public'));
 
-// Configurar o EJS como template engine
 app.set('view engine', 'ejs');
 
-// Definir a pasta onde ficarão os arquivos .ejs
 app.set('views', path.join(__dirname, 'views'));
 
-// Permitir servir arquivos estáticos (CSS, JS, imagens)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Para interpretar dados JSON e de formulários
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
 
 
@@ -86,55 +83,67 @@ app.post("/portaria", authenticate, async (req, res) => {
 });
 
 
-app.get("/service", authenticate, (req,res)=>{
+app.get("/service", authenticate, (req, res) => {
     res.render("service.ejs")
 })
 
 
 
+// Função para limpar CPF
+function limparCPF(cpf) {
+    return cpf.replace(/\D/g, ''); // Remove tudo que não for dígito
+}
+
 app.post("/authenticate", async (req, res) => {
     try {
-        function limparCPF(cpf) {
-            return cpf.replace(/\D/g, ''); // Remove tudo que não for dígito
+        const { cpf, senha } = req.body;
+
+        // Validação de entrada
+        if (!cpf || !senha) {
+            return res.status(400).json({ error: "CPF e senha são obrigatórios" });
         }
-        let { cpf, senha } = req.body;
 
-        cpf = limparCPF(cpf);
-
-        console.log(cpf, senha)
-
-        // Procurar o usuário pelo nome
-        const user = await prisma.users.findFirst({ where: { cpf: cpf } });
-
-        if (user) {
-            // Comparar a senha fornecida com a senha criptografada no banco
-            const comparison = await compare(senha, user.password);
-
-
-            if (comparison) {
-                // Se a senha for correta, salvar os dados do usuário na sessão
-                req.session.user = {
-                    id: user.id,
-                    name: user.nome,
-                };
-
-                // Verificar se a sessão do usuário está definida antes de acessar o nome
-                if (req.session.user) {
-                    console.log("Sessão de usuário encontrada.");
-                } else {
-                    console.log("Sessão de usuário não encontrada.");
-                }
-
-                res.redirect("/service");
-
-            }
-        } else {
-            // Usuário não encontrado
-            res.redirect("/");
+        // Limpar e validar CPF
+        const cleanedCPF = limparCPF(cpf);
+        if (cleanedCPF.length !== 11) {
+            return res.status(400).json({ error: "CPF inválido" });
         }
+
+        console.log(`Tentativa de login com CPF: ${cleanedCPF}`);
+
+        // Procurar o usuário pelo CPF
+        const user = await prisma.users.findFirst({ where: { cpf: cleanedCPF } });
+
+        if (!user) {
+            // Evitar revelar se o CPF existe ou não para maior segurança
+            return res.redirect("/")
+        }
+
+        // Comparar a senha fornecida com a senha criptografada
+        const isPasswordValid = await compare(senha, user.password);
+
+        if (!isPasswordValid) {
+            // TODO: Implementar limite de tentativas de login para proteção contra força bruta
+            return res.redirect("/")
+        }
+
+        // Salvar os dados do usuário na sessão
+        req.session.user = {
+            id: user.id,
+            name: user.nome,
+        };
+
+        console.log(`Usuário autenticado: ${user.nome} (ID: ${user.id})`);
+
+        // Redirecionar para a página de serviço
+        res.redirect("/service");
+
     } catch (error) {
-        console.error('Erro ao autenticar usuário:', error);
-        res.status(500).send("Erro interno no servidor.");
+        console.error('Erro ao autenticar usuário:', {
+            message: error.message,
+            stack: error.stack,
+        });
+        return res.redirect("/")
     }
 });
 
@@ -175,7 +184,7 @@ app.post("/user", authenticate, async (req, res) => {
 });
 
 app.use((req, res) => {
-  res.status(404).render('404'); // Certifique-se que views/404.ejs existe
+    res.status(404).render('404'); // Certifique-se que views/404.ejs existe
 });
 
 app.listen(8080, () => {
