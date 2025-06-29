@@ -1,210 +1,216 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Portarias</title>
     <!-- DataTables CSS -->
-    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"
+      rel="stylesheet"
+    />
     <!-- Font Awesome for icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f0f0f0;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f0f0f0;
+      }
 
-        .container {
-            width: 100%;
-            margin: 0 auto;
-        }
+      .container {
+        width: 100%;
+        margin: 0 auto;
+      }
 
-        h2 {
-            color: #003087;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+      h2 {
+        color: #003087;
+        text-align: center;
+        margin-bottom: 20px;
+      }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #e6f0ff;
-            border: 2px solid #003087;
-        }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #e6f0ff;
+        border: 2px solid #003087;
+      }
 
-        th,
-        td {
-            padding: 12px;
-            text-align: center;
-            border: 1px solid #003087;
-        }
+      th,
+      td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #003087;
+      }
 
-        th {
-            background-color: #003087;
-            color: white;
-            font-weight: bold;
-            vertical-align: middle;
-        }
+      th {
+        background-color: #003087;
+        color: white;
+        font-weight: bold;
+        vertical-align: middle;
+      }
 
-        tr:nth-child(even) {
-            background-color: #b3d1ff;
-        }
+      tr:nth-child(even) {
+        background-color: #b3d1ff;
+      }
 
-        tr:hover {
-            background-color: #99c2ff;
-        }
+      tr:hover {
+        background-color: #99c2ff;
+      }
 
-        .action-btn {
-            padding: 6px 10px;
-            margin: 10px 0px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+      .action-btn {
+        padding: 6px 10px;
+        margin: 10px 0px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
 
-        .edit-btn {
-            background-color: #0040ff;
-            color: white;
-        }
+      .edit-btn {
+        background-color: #0040ff;
+        color: white;
+      }
 
-        .delete-btn {
-            background-color: #ff3333;
-            color: white;
-        }
+      .delete-btn {
+        background-color: #ff3333;
+        color: white;
+      }
 
-        .publish-btn {
-            background-color: #33cc33;
-            color: white;
-        }
+      .publish-btn {
+        background-color: #33cc33;
+        color: white;
+      }
 
-        .dataTables_wrapper .dataTables_filter input {
-            border: 1px solid #003087;
-            padding: 5px;
-            margin-left: 5px;
-        }
+      .dataTables_wrapper .dataTables_filter input {
+        border: 1px solid #003087;
+        padding: 5px;
+        margin-left: 5px;
+      }
 
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            background-color: #003087;
-            color: white !important;
-            padding: 5px 10px;
-            margin: 0 2px;
-            border-radius: 3px;
-            text-decoration: none;
-        }
+      .dataTables_wrapper .dataTables_paginate .paginate_button {
+        background-color: #003087;
+        color: white !important;
+        padding: 5px 10px;
+        margin: 0 2px;
+        border-radius: 3px;
+        text-decoration: none;
+      }
 
-        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-            background-color: #0040ff;
-        }
+      .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background-color: #0040ff;
+      }
 
-        .dataTables_wrapper .dataTables_length select {
-            border: 1px solid #003087;
-            padding: 5px;
-        }
+      .dataTables_wrapper .dataTables_length select {
+        border: 1px solid #003087;
+        padding: 5px;
+      }
 
-        select.tipo-documento,
-        select.filtro-tipo-documento {
-            padding: 5px;
-            border: 1px solid #003087;
-            border-radius: 4px;
-            background-color: #fff;
-            cursor: pointer;
-            font-size: 12px;
-            width: 100%;
-            margin-top: 5px;
-        }
+      select.tipo-documento,
+      select.filtro-tipo-documento {
+        padding: 5px;
+        border: 1px solid #003087;
+        border-radius: 4px;
+        background-color: #fff;
+        cursor: pointer;
+        font-size: 12px;
+        width: 100%;
+        margin-top: 5px;
+      }
 
-        th.documento-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
+      th.documento-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <h2>Lista de Portarias</h2>
-        <table id="portariaTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th class="documento-header">
-                        <select class="filtro-tipo-documento">
-                            <option value="">Todos</option>
-                            <option value="NOMEAR">NOMEAR</option>
-                            <option value="EXONERAR">EXONERAR</option>
-                            <option value="DESIGNAR">DESIGNAR</option>
-                        </select>
-                    </th>
-                    <th>Nome</th>
-                    <th>Portaria</th>
-                    <th>CPF</th>
-                    <th>Cargo</th>
-                    <th>Símbolo</th>
-                    <th>Secretaria</th>
-                    <th>Nomeação</th>
-                    <th>Data</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% portarias.forEach(portaria=> { %>
-                    <tr>
-                        <td>
-                            <%= portaria.id %>
-                        </td>
-                        <td>
-                            <%= portaria.tipoDocumento%>
-                        </td>
-                        <td>
-                            <%= portaria.nome %>
-                        </td>
-                        <td>
-                            <%= portaria.portaria %>
-                        </td>
-                        <td>
-                            <%= portaria.cpf %>
-                        </td>
-                        <td>
-                            <%= portaria.cargo %>
-                        </td>
-                        <td>
-                            <%= portaria.simbolo %>
-                        </td>
-                        <td>
-                            <%= portaria.secretaria %>
-                        </td>
-                        <td>
-                            <%= portaria.data %>
-                        </td>
-                        <td>
-                            <%= portaria.dataNomeacao %>
-                        </td>
-                        <td>
-                            <a href="/editar-portaria/<%= portaria.id %>" class="action-btn edit-btn">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="/apagar-portaria/<%= portaria.id %>" class="action-btn delete-btn"
-                                onclick="return confirm('Tem certeza que deseja apagar?')">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                            <a href="/publicar-portaria/<%= portaria.id %>" class="action-btn publish-btn">
-                                <i class="fas fa-share"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <% }) %>
-            </tbody>
-        </table>
+      <h2>Lista de Portarias</h2>
+      <table id="portariaTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th class="documento-header">
+              <select class="filtro-tipo-documento">
+                <option value="">Todos</option>
+                <option value="NOMEAR">NOMEAR</option>
+                <option value="EXONERAR">EXONERAR</option>
+                <option value="DESIGNAR">DESIGNAR</option>
+              </select>
+            </th>
+            <th>Nome</th>
+            <th>Portaria</th>
+            <th>CPF</th>
+            <th>Cargo</th>
+            <th>Símbolo</th>
+            <th>Secretaria</th>
+            <th>Nomeação</th>
+            <th>Data</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% portarias.forEach(portaria=> { %>
+          <tr>
+            <td><%= portaria.id %></td>
+            <td><%= portaria.tipoDocumento%></td>
+            <td><%= portaria.nome %></td>
+            <td><%= portaria.portaria %></td>
+            <td><%= portaria.cpf %></td>
+            <td><%= portaria.cargo %></td>
+            <td><%= portaria.simbolo %></td>
+            <td><%= portaria.secretaria %></td>
+            <td><%= portaria.data %></td>
+            <td><%= portaria.dataNomeacao %></td>
+            <td>
+              <% if (!portaria.filename) { %>
+              <form
+                action="/upload/<%=portaria.id%>"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                <input type="file" name="file" />
+                <button>Anexar Documento</button>
+              </form>
+              <% } %>
+              <a
+                href="/editar-portaria/<%= portaria.id %>"
+                class="action-btn edit-btn"
+              >
+                <i class="fas fa-edit"></i>
+              </a>
+              <a
+                href="/publicar-portaria/<%= portaria.id %>"
+                class="action-btn publish-btn"
+              >
+                <i class="fas fa-share"></i>
+              </a>
+
+              <% if (portaria.filename) { %>
+              <a
+                href="/tmp/<%= portaria.filename %>"
+                class="action-btn publish-btn"
+              >
+                <i class="fas fa-file-alt"></i>  
+              </a>
+              <% } %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
     </div>
 
     <!-- jQuery -->
@@ -213,71 +219,73 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
     <script>
-        $(document).ready(function () {
-            // Inicializa o DataTables com filtro
-            const table = $('#portariaTable').DataTable({
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json'
-                },
-                pageLength: 10,
-                lengthMenu: [5, 10, 25, 50],
-                order: [[0, 'desc']],
-                columnDefs: [
-                    { orderable: false, targets: [1, 10] } // Desabilita ordenação nas colunas Documento e Ações
-                ],
-                initComplete: function () {
-                    // Adiciona evento ao filtro tipoDocumento
-                    this.api()
-                        .columns(1) // Coluna Documento
-                        .every(function () {
-                            const column = this;
-                            $('.filtro-tipo-documento').on('change', function () {
-                                const val = $.fn.dataTable.util.escapeRegex($(this).val());
-                                column.search(val ? '^' + val + '$' : '', true, false).draw();
-                            });
-                        });
-                }
-            });
-
-            // Adiciona evento de mudança no select tipoDocumento (para edição)
-            $('.tipo-documento').on('change', function () {
-                const portariaId = $(this).data('id');
-                const novoTipoDocumento = $(this).val();
-
-                // Confirmação antes de atualizar
-                if (!confirm('Deseja alterar o tipo de documento?')) {
-                    $(this).val($(this).data('valor-anterior'));
-                    return;
-                }
-
-                // Envia a atualização para o backend via AJAX
-                $.ajax({
-                    url: `/atualizar-portaria/${portariaId}`,
-                    method: 'PATCH',
-                    contentType: 'application/json',
-                    data: JSON.stringify({ tipoDocumento: novoTipoDocumento }),
-                    success: function (response) {
-                        alert('Tipo de documento atualizado com sucesso!');
-                        // Atualiza a tabela para refletir a mudança
-                        table.draw();
-                    },
-                    error: function (xhr) {
-                        alert('Erro ao atualizar tipo de documento: ' + xhr.responseJSON?.error || 'Erro desconhecido');
-                        // Reverte o select para o valor anterior em caso de erro
-                        $(this).val($(this).data('valor-anterior'));
-                    }
+      $(document).ready(function () {
+        // Inicializa o DataTables com filtro
+        const table = $("#portariaTable").DataTable({
+          language: {
+            url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json",
+          },
+          pageLength: 10,
+          lengthMenu: [5, 10, 25, 50],
+          order: [[0, "desc"]],
+          columnDefs: [
+            { orderable: false, targets: [1, 10] }, // Desabilita ordenação nas colunas Documento e Ações
+          ],
+          initComplete: function () {
+            // Adiciona evento ao filtro tipoDocumento
+            this.api()
+              .columns(1) // Coluna Documento
+              .every(function () {
+                const column = this;
+                $(".filtro-tipo-documento").on("change", function () {
+                  const val = $.fn.dataTable.util.escapeRegex($(this).val());
+                  column.search(val ? "^" + val + "$" : "", true, false).draw();
                 });
-
-                // Armazena o valor atual como valor anterior
-                $(this).data('valor-anterior', novoTipoDocumento);
-            });
-
-            // Inicializa o valor anterior para cada select
-            $('.tipo-documento').each(function () {
-                $(this).data('valor-anterior', $(this).val());
-            });
+              });
+          },
         });
-    </script>
-</body>
 
+        // Adiciona evento de mudança no select tipoDocumento (para edição)
+        $(".tipo-documento").on("change", function () {
+          const portariaId = $(this).data("id");
+          const novoTipoDocumento = $(this).val();
+
+          // Confirmação antes de atualizar
+          if (!confirm("Deseja alterar o tipo de documento?")) {
+            $(this).val($(this).data("valor-anterior"));
+            return;
+          }
+
+          // Envia a atualização para o backend via AJAX
+          $.ajax({
+            url: `/atualizar-portaria/${portariaId}`,
+            method: "PATCH",
+            contentType: "application/json",
+            data: JSON.stringify({ tipoDocumento: novoTipoDocumento }),
+            success: function (response) {
+              alert("Tipo de documento atualizado com sucesso!");
+              // Atualiza a tabela para refletir a mudança
+              table.draw();
+            },
+            error: function (xhr) {
+              alert(
+                "Erro ao atualizar tipo de documento: " +
+                  xhr.responseJSON?.error || "Erro desconhecido"
+              );
+              // Reverte o select para o valor anterior em caso de erro
+              $(this).val($(this).data("valor-anterior"));
+            },
+          });
+
+          // Armazena o valor atual como valor anterior
+          $(this).data("valor-anterior", novoTipoDocumento);
+        });
+
+        // Inicializa o valor anterior para cada select
+        $(".tipo-documento").each(function () {
+          $(this).data("valor-anterior", $(this).val());
+        });
+      });
+    </script>
+  </body>
 </html>

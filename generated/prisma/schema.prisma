@@ -17,6 +17,7 @@ datasource db {
 model Portaria {
   id            Int       @id @default(autoincrement())
   portaria      String?
+  filename      String?
   nome          String?
   cpf           String?
   cargo         String?
@@ -34,6 +35,7 @@ model Users {
   nome     String
   cpf      String
   password String
+  role     String
 
   @@map("users")
 }

@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 const cors = require("cors");
 const app = express();
 const path = require("path");
@@ -7,6 +8,9 @@ const session = require('express-session');
 const authenticate = require("./middlewares/authenticate");
 const { PrismaClient } = require("./generated/prisma");
 const prisma = new PrismaClient();
+const uploadConfig = require("./config/multer");
+const upload = multer(uploadConfig.upload("./tmp"));
+
 
 app.use(cors());
 
@@ -126,9 +130,17 @@ app.post("/portariaauth", authenticate, async (req, res) => {
         // Verifica se o usuário (pelo CPF) existe
         const usuario = await prisma.users.findFirst({ where: { cpf: user } });
 
+
+
         if (!usuario) {
             return res.status(400).json({ error: "Usuário ou senha incorretos!" });
         }
+
+                if(usuario.role != "admin"){
+        return res.status(400).json({ error: "Você não tem privilégios de ADM!" });
+
+        }
+
 
         // Verifica a senha
         const senhaCorreta = await compare(password, usuario.password);
@@ -228,6 +240,12 @@ app.post("/portariaauth/:id", authenticate, async (req, res) => {
         // Verifica se o usuário (pelo CPF) existe
         const usuario = await prisma.users.findFirst({ where: { cpf: user } });
 
+
+        if(usuario.role != "admin"){
+        return res.status(400).json({ error: "Você não tem privilégios de ADM!" });
+
+        }
+
         if (!usuario) {
             return res.status(400).json({ error: "Usuário ou senha incorretos!" });
         }
@@ -286,6 +304,39 @@ app.post("/portariaauth/:id", authenticate, async (req, res) => {
     }
 });
 
+app.post("/upload/:id",authenticate,  upload.single("file"), async (req, res) => {
+  const id = parseInt(req.params.id, 10); // Converte o id para número
+
+  try {
+    const user = await prisma.portaria.findFirst({
+      where: { id },
+    });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ error: "Portaria não encontrada para upload do arquivo." });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ error: "Nenhum arquivo enviado." });
+    }
+
+    const updated = await prisma.portaria.update({
+      where: { id },
+      data: {
+        filename: req.file.filename,
+      },
+    });
+
+    return res.status(200).json({
+      message: "Arquivo enviado com sucesso!",
+    });
+  } catch (error) {
+    console.error("Erro ao fazer upload:", error);
+    return res.status(500).json({ error: "Erro interno no servidor." });
+  }
+});
 
 
 app.get("/service", authenticate, (req, res) => {
@@ -352,7 +403,7 @@ app.post("/authenticate", async (req, res) => {
     }
 });
 
-app.get("/logout", (req, res) => {
+app.get("/logout",authenticate, (req, res) => {
     // Destroi a sessão do usuário
     req.session.destroy((err) => {
         if (err) {
@@ -376,7 +427,7 @@ function formatDateBR(date) {
   return `${day}/${month}/${year}`;
 }
 
-app.get("/lista-portaria", async (req, res) => {
+app.get("/lista-portaria", authenticate, async (req, res) => {
   const portarias = await prisma.portaria.findMany();
   const portariasFormatadas = portarias.map(p => ({
     ...p,
@@ -389,10 +440,11 @@ app.get("/lista-portaria", async (req, res) => {
 });
 
 
-app.post("/user", async (req, res) => {
+app.post("/user", authenticate, async (req, res) => {
     const { nome, cpf, password } = req.body;
 
-    console.log(nome, cpf, password)
+    const role = "admin"
+
 
     const cpfExite = await prisma.users.findFirst({ where: { cpf } });
 
@@ -403,16 +455,26 @@ app.post("/user", async (req, res) => {
 
     const passwordHash = await hash(password, 10);
 
-    console.log(passwordHash)
 
-
-    const user = await prisma.users.create({ data: { nome, cpf, password: passwordHash } });
+    const user = await prisma.users.create({ data: { nome, cpf, password: passwordHash, role:role } });
 
     res.json(user)
 });
 
+
+app.get('/tmp/:filename', authenticate, (req, res, next) => {
+  const filePath = path.join(__dirname, 'tmp', req.params.filename);
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      res.status(404).send('Arquivo não encontrado');
+    }
+  });
+});
+
+
+
 app.use((req, res) => {
-    res.status(404).render('404'); // Certifique-se que views/404.ejs existe
+    res.status(404).render('404');
 });
 
 app.listen(3000, () => {

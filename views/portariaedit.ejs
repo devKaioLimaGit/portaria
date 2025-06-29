@@ -599,7 +599,8 @@
       });
 
       Packer.toBlob(doc).then((blob) => {
-        saveAs(blob, `portaria_${nome.replace(/\s+/g, '_').toLowerCase()}.docx`);
+               saveAs(blob, `portaria_${nome.replace(/\s+/g, '_').toLowerCase()}_${portaria}.docx`);
+
       }).catch((error) => {
         console.error('Erro ao gerar o documento Word:', error);
         alert('Erro ao gerar o documento Word: ' + error.message);

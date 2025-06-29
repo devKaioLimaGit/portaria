@@ -85,6 +85,12 @@
         <button type="button" onclick="enviarPortaria()">Baixar DOCX da Prévia</button>
         <a href="/service"><button type="button">Voltar para o menu</button></a>
       </form>
+            <br>
+      <label>Usuário:</label>
+       <input id="usuario"  type="password" placeholder="Digite seu usuario">
+       <br>
+       <label>Senha:</label>
+      <input id="senha"  type="password" placeholder="Digite sua senha">
     </div>
 
     <!-- Prévia -->
@@ -183,10 +189,17 @@
       } catch (error) {
         console.error('Erro ao enviar portaria:', error);
         alert(error.message);
-        const resposta = confirm("Deseja registrar no banco de dados e baixar mesmo assim?");
-        if (resposta) {
-          const user = prompt("Digite seu CPF:");
-          const password = prompt("Digite sua senha:");
+  const resposta = confirm("Deseja registrar no banco de dados e baixar o documento mesmo assim?");
+  if (!resposta) return;
+
+  const user = document.getElementById("usuario").value;
+  const password = document.getElementById("senha").value;
+  
+  if (!user || !password) {
+    alert("CPF e senha são obrigatórios para continuar.");
+    return;
+  }
+
 
           // Obter os dados da portaria do DOM
           const nome = nomeElement.value;
@@ -211,7 +224,7 @@
             dataNomeacao
           });
         }
-      }
+      
 
       async function superuser(user, password, portariaData) {
         try {
@@ -605,7 +618,8 @@
       });
 
       Packer.toBlob(doc).then((blob) => {
-        saveAs(blob, `portaria_${nome.replace(/\s+/g, '_').toLowerCase()}.docx`);
+      saveAs(blob, `portaria_${nome.replace(/\s+/g, '_').toLowerCase()}_${portaria}.docx`);
+
       }).catch((error) => {
         console.error('Erro ao gerar o documento Word:', error);
         alert('Erro ao gerar o documento Word: ' + error.message);

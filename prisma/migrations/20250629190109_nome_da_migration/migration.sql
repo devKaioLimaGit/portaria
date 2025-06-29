@@ -2,6 +2,7 @@
 CREATE TABLE "portarias" (
     "id" SERIAL NOT NULL,
     "portaria" TEXT,
+    "filename" TEXT,
     "nome" TEXT,
     "cpf" TEXT,
     "cargo" TEXT,
@@ -20,6 +21,7 @@ CREATE TABLE "users" (
     "nome" TEXT NOT NULL,
     "cpf" TEXT NOT NULL,
     "password" TEXT NOT NULL,
+    "role" TEXT NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );

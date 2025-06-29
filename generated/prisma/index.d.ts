@@ -983,6 +983,7 @@ export namespace Prisma {
   export type PortariaMinAggregateOutputType = {
     id: number | null
     portaria: string | null
+    filename: string | null
     nome: string | null
     cpf: string | null
     cargo: string | null
@@ -996,6 +997,7 @@ export namespace Prisma {
   export type PortariaMaxAggregateOutputType = {
     id: number | null
     portaria: string | null
+    filename: string | null
     nome: string | null
     cpf: string | null
     cargo: string | null
@@ -1009,6 +1011,7 @@ export namespace Prisma {
   export type PortariaCountAggregateOutputType = {
     id: number
     portaria: number
+    filename: number
     nome: number
     cpf: number
     cargo: number
@@ -1032,6 +1035,7 @@ export namespace Prisma {
   export type PortariaMinAggregateInputType = {
     id?: true
     portaria?: true
+    filename?: true
     nome?: true
     cpf?: true
     cargo?: true
@@ -1045,6 +1049,7 @@ export namespace Prisma {
   export type PortariaMaxAggregateInputType = {
     id?: true
     portaria?: true
+    filename?: true
     nome?: true
     cpf?: true
     cargo?: true
@@ -1058,6 +1063,7 @@ export namespace Prisma {
   export type PortariaCountAggregateInputType = {
     id?: true
     portaria?: true
+    filename?: true
     nome?: true
     cpf?: true
     cargo?: true
@@ -1158,6 +1164,7 @@ export namespace Prisma {
   export type PortariaGroupByOutputType = {
     id: number
     portaria: string | null
+    filename: string | null
     nome: string | null
     cpf: string | null
     cargo: string | null
@@ -1190,6 +1197,7 @@ export namespace Prisma {
   export type PortariaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     portaria?: boolean
+    filename?: boolean
     nome?: boolean
     cpf?: boolean
     cargo?: boolean
@@ -1203,6 +1211,7 @@ export namespace Prisma {
   export type PortariaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     portaria?: boolean
+    filename?: boolean
     nome?: boolean
     cpf?: boolean
     cargo?: boolean
@@ -1216,6 +1225,7 @@ export namespace Prisma {
   export type PortariaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     portaria?: boolean
+    filename?: boolean
     nome?: boolean
     cpf?: boolean
     cargo?: boolean
@@ -1229,6 +1239,7 @@ export namespace Prisma {
   export type PortariaSelectScalar = {
     id?: boolean
     portaria?: boolean
+    filename?: boolean
     nome?: boolean
     cpf?: boolean
     cargo?: boolean
@@ -1239,7 +1250,7 @@ export namespace Prisma {
     dataNomeacao?: boolean
   }
 
-  export type PortariaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "portaria" | "nome" | "cpf" | "cargo" | "simbolo" | "secretaria" | "tipoDocumento" | "data" | "dataNomeacao", ExtArgs["result"]["portaria"]>
+  export type PortariaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "portaria" | "filename" | "nome" | "cpf" | "cargo" | "simbolo" | "secretaria" | "tipoDocumento" | "data" | "dataNomeacao", ExtArgs["result"]["portaria"]>
 
   export type $PortariaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Portaria"
@@ -1247,6 +1258,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       portaria: string | null
+      filename: string | null
       nome: string | null
       cpf: string | null
       cargo: string | null
@@ -1680,6 +1692,7 @@ export namespace Prisma {
   interface PortariaFieldRefs {
     readonly id: FieldRef<"Portaria", 'Int'>
     readonly portaria: FieldRef<"Portaria", 'String'>
+    readonly filename: FieldRef<"Portaria", 'String'>
     readonly nome: FieldRef<"Portaria", 'String'>
     readonly cpf: FieldRef<"Portaria", 'String'>
     readonly cargo: FieldRef<"Portaria", 'String'>
@@ -2079,6 +2092,7 @@ export namespace Prisma {
     nome: string | null
     cpf: string | null
     password: string | null
+    role: string | null
   }
 
   export type UsersMaxAggregateOutputType = {
@@ -2086,6 +2100,7 @@ export namespace Prisma {
     nome: string | null
     cpf: string | null
     password: string | null
+    role: string | null
   }
 
   export type UsersCountAggregateOutputType = {
@@ -2093,6 +2108,7 @@ export namespace Prisma {
     nome: number
     cpf: number
     password: number
+    role: number
     _all: number
   }
 
@@ -2110,6 +2126,7 @@ export namespace Prisma {
     nome?: true
     cpf?: true
     password?: true
+    role?: true
   }
 
   export type UsersMaxAggregateInputType = {
@@ -2117,6 +2134,7 @@ export namespace Prisma {
     nome?: true
     cpf?: true
     password?: true
+    role?: true
   }
 
   export type UsersCountAggregateInputType = {
@@ -2124,6 +2142,7 @@ export namespace Prisma {
     nome?: true
     cpf?: true
     password?: true
+    role?: true
     _all?: true
   }
 
@@ -2218,6 +2237,7 @@ export namespace Prisma {
     nome: string
     cpf: string
     password: string
+    role: string
     _count: UsersCountAggregateOutputType | null
     _avg: UsersAvgAggregateOutputType | null
     _sum: UsersSumAggregateOutputType | null
@@ -2244,6 +2264,7 @@ export namespace Prisma {
     nome?: boolean
     cpf?: boolean
     password?: boolean
+    role?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type UsersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2251,6 +2272,7 @@ export namespace Prisma {
     nome?: boolean
     cpf?: boolean
     password?: boolean
+    role?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type UsersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2258,6 +2280,7 @@ export namespace Prisma {
     nome?: boolean
     cpf?: boolean
     password?: boolean
+    role?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type UsersSelectScalar = {
@@ -2265,9 +2288,10 @@ export namespace Prisma {
     nome?: boolean
     cpf?: boolean
     password?: boolean
+    role?: boolean
   }
 
-  export type UsersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "cpf" | "password", ExtArgs["result"]["users"]>
+  export type UsersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "cpf" | "password" | "role", ExtArgs["result"]["users"]>
 
   export type $UsersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Users"
@@ -2277,6 +2301,7 @@ export namespace Prisma {
       nome: string
       cpf: string
       password: string
+      role: string
     }, ExtArgs["result"]["users"]>
     composites: {}
   }
@@ -2704,6 +2729,7 @@ export namespace Prisma {
     readonly nome: FieldRef<"Users", 'String'>
     readonly cpf: FieldRef<"Users", 'String'>
     readonly password: FieldRef<"Users", 'String'>
+    readonly role: FieldRef<"Users", 'String'>
   }
     
 
@@ -3087,6 +3113,7 @@ export namespace Prisma {
   export const PortariaScalarFieldEnum: {
     id: 'id',
     portaria: 'portaria',
+    filename: 'filename',
     nome: 'nome',
     cpf: 'cpf',
     cargo: 'cargo',
@@ -3104,7 +3131,8 @@ export namespace Prisma {
     id: 'id',
     nome: 'nome',
     cpf: 'cpf',
-    password: 'password'
+    password: 'password',
+    role: 'role'
   };
 
   export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
@@ -3204,6 +3232,7 @@ export namespace Prisma {
     NOT?: PortariaWhereInput | PortariaWhereInput[]
     id?: IntFilter<"Portaria"> | number
     portaria?: StringNullableFilter<"Portaria"> | string | null
+    filename?: StringNullableFilter<"Portaria"> | string | null
     nome?: StringNullableFilter<"Portaria"> | string | null
     cpf?: StringNullableFilter<"Portaria"> | string | null
     cargo?: StringNullableFilter<"Portaria"> | string | null
@@ -3217,6 +3246,7 @@ export namespace Prisma {
   export type PortariaOrderByWithRelationInput = {
     id?: SortOrder
     portaria?: SortOrderInput | SortOrder
+    filename?: SortOrderInput | SortOrder
     nome?: SortOrderInput | SortOrder
     cpf?: SortOrderInput | SortOrder
     cargo?: SortOrderInput | SortOrder
@@ -3233,6 +3263,7 @@ export namespace Prisma {
     OR?: PortariaWhereInput[]
     NOT?: PortariaWhereInput | PortariaWhereInput[]
     portaria?: StringNullableFilter<"Portaria"> | string | null
+    filename?: StringNullableFilter<"Portaria"> | string | null
     nome?: StringNullableFilter<"Portaria"> | string | null
     cpf?: StringNullableFilter<"Portaria"> | string | null
     cargo?: StringNullableFilter<"Portaria"> | string | null
@@ -3246,6 +3277,7 @@ export namespace Prisma {
   export type PortariaOrderByWithAggregationInput = {
     id?: SortOrder
     portaria?: SortOrderInput | SortOrder
+    filename?: SortOrderInput | SortOrder
     nome?: SortOrderInput | SortOrder
     cpf?: SortOrderInput | SortOrder
     cargo?: SortOrderInput | SortOrder
@@ -3267,6 +3299,7 @@ export namespace Prisma {
     NOT?: PortariaScalarWhereWithAggregatesInput | PortariaScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Portaria"> | number
     portaria?: StringNullableWithAggregatesFilter<"Portaria"> | string | null
+    filename?: StringNullableWithAggregatesFilter<"Portaria"> | string | null
     nome?: StringNullableWithAggregatesFilter<"Portaria"> | string | null
     cpf?: StringNullableWithAggregatesFilter<"Portaria"> | string | null
     cargo?: StringNullableWithAggregatesFilter<"Portaria"> | string | null
@@ -3285,6 +3318,7 @@ export namespace Prisma {
     nome?: StringFilter<"Users"> | string
     cpf?: StringFilter<"Users"> | string
     password?: StringFilter<"Users"> | string
+    role?: StringFilter<"Users"> | string
   }
 
   export type UsersOrderByWithRelationInput = {
@@ -3292,6 +3326,7 @@ export namespace Prisma {
     nome?: SortOrder
     cpf?: SortOrder
     password?: SortOrder
+    role?: SortOrder
   }
 
   export type UsersWhereUniqueInput = Prisma.AtLeast<{
@@ -3302,6 +3337,7 @@ export namespace Prisma {
     nome?: StringFilter<"Users"> | string
     cpf?: StringFilter<"Users"> | string
     password?: StringFilter<"Users"> | string
+    role?: StringFilter<"Users"> | string
   }, "id">
 
   export type UsersOrderByWithAggregationInput = {
@@ -3309,6 +3345,7 @@ export namespace Prisma {
     nome?: SortOrder
     cpf?: SortOrder
     password?: SortOrder
+    role?: SortOrder
     _count?: UsersCountOrderByAggregateInput
     _avg?: UsersAvgOrderByAggregateInput
     _max?: UsersMaxOrderByAggregateInput
@@ -3324,10 +3361,12 @@ export namespace Prisma {
     nome?: StringWithAggregatesFilter<"Users"> | string
     cpf?: StringWithAggregatesFilter<"Users"> | string
     password?: StringWithAggregatesFilter<"Users"> | string
+    role?: StringWithAggregatesFilter<"Users"> | string
   }
 
   export type PortariaCreateInput = {
     portaria?: string | null
+    filename?: string | null
     nome?: string | null
     cpf?: string | null
     cargo?: string | null
@@ -3341,6 +3380,7 @@ export namespace Prisma {
   export type PortariaUncheckedCreateInput = {
     id?: number
     portaria?: string | null
+    filename?: string | null
     nome?: string | null
     cpf?: string | null
     cargo?: string | null
@@ -3353,6 +3393,7 @@ export namespace Prisma {
 
   export type PortariaUpdateInput = {
     portaria?: NullableStringFieldUpdateOperationsInput | string | null
+    filename?: NullableStringFieldUpdateOperationsInput | string | null
     nome?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
     cargo?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3366,6 +3407,7 @@ export namespace Prisma {
   export type PortariaUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     portaria?: NullableStringFieldUpdateOperationsInput | string | null
+    filename?: NullableStringFieldUpdateOperationsInput | string | null
     nome?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
     cargo?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3379,6 +3421,7 @@ export namespace Prisma {
   export type PortariaCreateManyInput = {
     id?: number
     portaria?: string | null
+    filename?: string | null
     nome?: string | null
     cpf?: string | null
     cargo?: string | null
@@ -3391,6 +3434,7 @@ export namespace Prisma {
 
   export type PortariaUpdateManyMutationInput = {
     portaria?: NullableStringFieldUpdateOperationsInput | string | null
+    filename?: NullableStringFieldUpdateOperationsInput | string | null
     nome?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
     cargo?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3404,6 +3448,7 @@ export namespace Prisma {
   export type PortariaUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     portaria?: NullableStringFieldUpdateOperationsInput | string | null
+    filename?: NullableStringFieldUpdateOperationsInput | string | null
     nome?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
     cargo?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3418,6 +3463,7 @@ export namespace Prisma {
     nome: string
     cpf: string
     password: string
+    role: string
   }
 
   export type UsersUncheckedCreateInput = {
@@ -3425,12 +3471,14 @@ export namespace Prisma {
     nome: string
     cpf: string
     password: string
+    role: string
   }
 
   export type UsersUpdateInput = {
     nome?: StringFieldUpdateOperationsInput | string
     cpf?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type UsersUncheckedUpdateInput = {
@@ -3438,6 +3486,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     cpf?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type UsersCreateManyInput = {
@@ -3445,12 +3494,14 @@ export namespace Prisma {
     nome: string
     cpf: string
     password: string
+    role: string
   }
 
   export type UsersUpdateManyMutationInput = {
     nome?: StringFieldUpdateOperationsInput | string
     cpf?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type UsersUncheckedUpdateManyInput = {
@@ -3458,6 +3509,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     cpf?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -3505,6 +3557,7 @@ export namespace Prisma {
   export type PortariaCountOrderByAggregateInput = {
     id?: SortOrder
     portaria?: SortOrder
+    filename?: SortOrder
     nome?: SortOrder
     cpf?: SortOrder
     cargo?: SortOrder
@@ -3522,6 +3575,7 @@ export namespace Prisma {
   export type PortariaMaxOrderByAggregateInput = {
     id?: SortOrder
     portaria?: SortOrder
+    filename?: SortOrder
     nome?: SortOrder
     cpf?: SortOrder
     cargo?: SortOrder
@@ -3535,6 +3589,7 @@ export namespace Prisma {
   export type PortariaMinOrderByAggregateInput = {
     id?: SortOrder
     portaria?: SortOrder
+    filename?: SortOrder
     nome?: SortOrder
     cpf?: SortOrder
     cargo?: SortOrder
@@ -3617,6 +3672,7 @@ export namespace Prisma {
     nome?: SortOrder
     cpf?: SortOrder
     password?: SortOrder
+    role?: SortOrder
   }
 
   export type UsersAvgOrderByAggregateInput = {
@@ -3628,6 +3684,7 @@ export namespace Prisma {
     nome?: SortOrder
     cpf?: SortOrder
     password?: SortOrder
+    role?: SortOrder
   }
 
   export type UsersMinOrderByAggregateInput = {
@@ -3635,6 +3692,7 @@ export namespace Prisma {
     nome?: SortOrder
     cpf?: SortOrder
     password?: SortOrder
+    role?: SortOrder
   }
 
   export type UsersSumOrderByAggregateInput = {
