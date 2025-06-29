@@ -664,6 +664,10 @@ export namespace Prisma {
             args: Prisma.PortariaCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.PortariaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortariaPayload>[]
+          }
           delete: {
             args: Prisma.PortariaDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$PortariaPayload>
@@ -679,6 +683,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.PortariaUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PortariaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortariaPayload>[]
           }
           upsert: {
             args: Prisma.PortariaUpsertArgs<ExtArgs>
@@ -730,6 +738,10 @@ export namespace Prisma {
             args: Prisma.UsersCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.UsersCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsersPayload>[]
+          }
           delete: {
             args: Prisma.UsersDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$UsersPayload>
@@ -745,6 +757,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.UsersUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UsersUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsersPayload>[]
           }
           upsert: {
             args: Prisma.UsersUpsertArgs<ExtArgs>
@@ -966,38 +982,41 @@ export namespace Prisma {
 
   export type PortariaMinAggregateOutputType = {
     id: number | null
-    nome: string | null
     portaria: string | null
+    nome: string | null
     cpf: string | null
     cargo: string | null
     simbolo: string | null
     secretaria: string | null
-    nomeacao: Date | null
+    tipoDocumento: string | null
     data: Date | null
+    dataNomeacao: Date | null
   }
 
   export type PortariaMaxAggregateOutputType = {
     id: number | null
-    nome: string | null
     portaria: string | null
+    nome: string | null
     cpf: string | null
     cargo: string | null
     simbolo: string | null
     secretaria: string | null
-    nomeacao: Date | null
+    tipoDocumento: string | null
     data: Date | null
+    dataNomeacao: Date | null
   }
 
   export type PortariaCountAggregateOutputType = {
     id: number
-    nome: number
     portaria: number
+    nome: number
     cpf: number
     cargo: number
     simbolo: number
     secretaria: number
-    nomeacao: number
+    tipoDocumento: number
     data: number
+    dataNomeacao: number
     _all: number
   }
 
@@ -1012,38 +1031,41 @@ export namespace Prisma {
 
   export type PortariaMinAggregateInputType = {
     id?: true
-    nome?: true
     portaria?: true
+    nome?: true
     cpf?: true
     cargo?: true
     simbolo?: true
     secretaria?: true
-    nomeacao?: true
+    tipoDocumento?: true
     data?: true
+    dataNomeacao?: true
   }
 
   export type PortariaMaxAggregateInputType = {
     id?: true
-    nome?: true
     portaria?: true
+    nome?: true
     cpf?: true
     cargo?: true
     simbolo?: true
     secretaria?: true
-    nomeacao?: true
+    tipoDocumento?: true
     data?: true
+    dataNomeacao?: true
   }
 
   export type PortariaCountAggregateInputType = {
     id?: true
-    nome?: true
     portaria?: true
+    nome?: true
     cpf?: true
     cargo?: true
     simbolo?: true
     secretaria?: true
-    nomeacao?: true
+    tipoDocumento?: true
     data?: true
+    dataNomeacao?: true
     _all?: true
   }
 
@@ -1135,14 +1157,15 @@ export namespace Prisma {
 
   export type PortariaGroupByOutputType = {
     id: number
-    nome: string
-    portaria: string
-    cpf: string
-    cargo: string
-    simbolo: string
-    secretaria: string
-    nomeacao: Date
-    data: Date
+    portaria: string | null
+    nome: string | null
+    cpf: string | null
+    cargo: string | null
+    simbolo: string | null
+    secretaria: string | null
+    tipoDocumento: string | null
+    data: Date | null
+    dataNomeacao: Date | null
     _count: PortariaCountAggregateOutputType | null
     _avg: PortariaAvgAggregateOutputType | null
     _sum: PortariaSumAggregateOutputType | null
@@ -1166,45 +1189,72 @@ export namespace Prisma {
 
   export type PortariaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    nome?: boolean
     portaria?: boolean
+    nome?: boolean
     cpf?: boolean
     cargo?: boolean
     simbolo?: boolean
     secretaria?: boolean
-    nomeacao?: boolean
+    tipoDocumento?: boolean
     data?: boolean
+    dataNomeacao?: boolean
   }, ExtArgs["result"]["portaria"]>
 
+  export type PortariaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    portaria?: boolean
+    nome?: boolean
+    cpf?: boolean
+    cargo?: boolean
+    simbolo?: boolean
+    secretaria?: boolean
+    tipoDocumento?: boolean
+    data?: boolean
+    dataNomeacao?: boolean
+  }, ExtArgs["result"]["portaria"]>
 
+  export type PortariaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    portaria?: boolean
+    nome?: boolean
+    cpf?: boolean
+    cargo?: boolean
+    simbolo?: boolean
+    secretaria?: boolean
+    tipoDocumento?: boolean
+    data?: boolean
+    dataNomeacao?: boolean
+  }, ExtArgs["result"]["portaria"]>
 
   export type PortariaSelectScalar = {
     id?: boolean
-    nome?: boolean
     portaria?: boolean
+    nome?: boolean
     cpf?: boolean
     cargo?: boolean
     simbolo?: boolean
     secretaria?: boolean
-    nomeacao?: boolean
+    tipoDocumento?: boolean
     data?: boolean
+    dataNomeacao?: boolean
   }
 
-  export type PortariaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "portaria" | "cpf" | "cargo" | "simbolo" | "secretaria" | "nomeacao" | "data", ExtArgs["result"]["portaria"]>
+  export type PortariaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "portaria" | "nome" | "cpf" | "cargo" | "simbolo" | "secretaria" | "tipoDocumento" | "data" | "dataNomeacao", ExtArgs["result"]["portaria"]>
 
   export type $PortariaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Portaria"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      nome: string
-      portaria: string
-      cpf: string
-      cargo: string
-      simbolo: string
-      secretaria: string
-      nomeacao: Date
-      data: Date
+      portaria: string | null
+      nome: string | null
+      cpf: string | null
+      cargo: string | null
+      simbolo: string | null
+      secretaria: string | null
+      tipoDocumento: string | null
+      data: Date | null
+      dataNomeacao: Date | null
     }, ExtArgs["result"]["portaria"]>
     composites: {}
   }
@@ -1323,6 +1373,30 @@ export namespace Prisma {
     createMany<T extends PortariaCreateManyArgs>(args?: SelectSubset<T, PortariaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Portarias and returns the data saved in the database.
+     * @param {PortariaCreateManyAndReturnArgs} args - Arguments to create many Portarias.
+     * @example
+     * // Create many Portarias
+     * const portaria = await prisma.portaria.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Portarias and only return the `id`
+     * const portariaWithIdOnly = await prisma.portaria.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PortariaCreateManyAndReturnArgs>(args?: SelectSubset<T, PortariaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PortariaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a Portaria.
      * @param {PortariaDeleteArgs} args - Arguments to delete one Portaria.
      * @example
@@ -1385,6 +1459,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends PortariaUpdateManyArgs>(args: SelectSubset<T, PortariaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Portarias and returns the data updated in the database.
+     * @param {PortariaUpdateManyAndReturnArgs} args - Arguments to update many Portarias.
+     * @example
+     * // Update many Portarias
+     * const portaria = await prisma.portaria.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Portarias and only return the `id`
+     * const portariaWithIdOnly = await prisma.portaria.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PortariaUpdateManyAndReturnArgs>(args: SelectSubset<T, PortariaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PortariaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Portaria.
@@ -1575,14 +1679,15 @@ export namespace Prisma {
    */
   interface PortariaFieldRefs {
     readonly id: FieldRef<"Portaria", 'Int'>
-    readonly nome: FieldRef<"Portaria", 'String'>
     readonly portaria: FieldRef<"Portaria", 'String'>
+    readonly nome: FieldRef<"Portaria", 'String'>
     readonly cpf: FieldRef<"Portaria", 'String'>
     readonly cargo: FieldRef<"Portaria", 'String'>
     readonly simbolo: FieldRef<"Portaria", 'String'>
     readonly secretaria: FieldRef<"Portaria", 'String'>
-    readonly nomeacao: FieldRef<"Portaria", 'DateTime'>
+    readonly tipoDocumento: FieldRef<"Portaria", 'String'>
     readonly data: FieldRef<"Portaria", 'DateTime'>
+    readonly dataNomeacao: FieldRef<"Portaria", 'DateTime'>
   }
     
 
@@ -1777,13 +1882,32 @@ export namespace Prisma {
     /**
      * The data needed to create a Portaria.
      */
-    data: XOR<PortariaCreateInput, PortariaUncheckedCreateInput>
+    data?: XOR<PortariaCreateInput, PortariaUncheckedCreateInput>
   }
 
   /**
    * Portaria createMany
    */
   export type PortariaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Portarias.
+     */
+    data: PortariaCreateManyInput | PortariaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Portaria createManyAndReturn
+   */
+  export type PortariaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Portaria
+     */
+    select?: PortariaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Portaria
+     */
+    omit?: PortariaOmit<ExtArgs> | null
     /**
      * The data used to create many Portarias.
      */
@@ -1817,6 +1941,32 @@ export namespace Prisma {
    * Portaria updateMany
    */
   export type PortariaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Portarias.
+     */
+    data: XOR<PortariaUpdateManyMutationInput, PortariaUncheckedUpdateManyInput>
+    /**
+     * Filter which Portarias to update
+     */
+    where?: PortariaWhereInput
+    /**
+     * Limit how many Portarias to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Portaria updateManyAndReturn
+   */
+  export type PortariaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Portaria
+     */
+    select?: PortariaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Portaria
+     */
+    omit?: PortariaOmit<ExtArgs> | null
     /**
      * The data used to update Portarias.
      */
@@ -2096,7 +2246,19 @@ export namespace Prisma {
     password?: boolean
   }, ExtArgs["result"]["users"]>
 
+  export type UsersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    cpf?: boolean
+    password?: boolean
+  }, ExtArgs["result"]["users"]>
 
+  export type UsersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    cpf?: boolean
+    password?: boolean
+  }, ExtArgs["result"]["users"]>
 
   export type UsersSelectScalar = {
     id?: boolean
@@ -2233,6 +2395,30 @@ export namespace Prisma {
     createMany<T extends UsersCreateManyArgs>(args?: SelectSubset<T, UsersCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Users and returns the data saved in the database.
+     * @param {UsersCreateManyAndReturnArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const users = await prisma.users.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Users and only return the `id`
+     * const usersWithIdOnly = await prisma.users.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UsersCreateManyAndReturnArgs>(args?: SelectSubset<T, UsersCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a Users.
      * @param {UsersDeleteArgs} args - Arguments to delete one Users.
      * @example
@@ -2295,6 +2481,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends UsersUpdateManyArgs>(args: SelectSubset<T, UsersUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users and returns the data updated in the database.
+     * @param {UsersUpdateManyAndReturnArgs} args - Arguments to update many Users.
+     * @example
+     * // Update many Users
+     * const users = await prisma.users.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Users and only return the `id`
+     * const usersWithIdOnly = await prisma.users.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UsersUpdateManyAndReturnArgs>(args: SelectSubset<T, UsersUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Users.
@@ -2697,6 +2913,25 @@ export namespace Prisma {
   }
 
   /**
+   * Users createManyAndReturn
+   */
+  export type UsersCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Users
+     */
+    select?: UsersSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Users
+     */
+    omit?: UsersOmit<ExtArgs> | null
+    /**
+     * The data used to create many Users.
+     */
+    data: UsersCreateManyInput | UsersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * Users update
    */
   export type UsersUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2722,6 +2957,32 @@ export namespace Prisma {
    * Users updateMany
    */
   export type UsersUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UsersUpdateManyMutationInput, UsersUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UsersWhereInput
+    /**
+     * Limit how many Users to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Users updateManyAndReturn
+   */
+  export type UsersUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Users
+     */
+    select?: UsersSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Users
+     */
+    omit?: UsersOmit<ExtArgs> | null
     /**
      * The data used to update Users.
      */
@@ -2825,14 +3086,15 @@ export namespace Prisma {
 
   export const PortariaScalarFieldEnum: {
     id: 'id',
-    nome: 'nome',
     portaria: 'portaria',
+    nome: 'nome',
     cpf: 'cpf',
     cargo: 'cargo',
     simbolo: 'simbolo',
     secretaria: 'secretaria',
-    nomeacao: 'nomeacao',
-    data: 'data'
+    tipoDocumento: 'tipoDocumento',
+    data: 'data',
+    dataNomeacao: 'dataNomeacao'
   };
 
   export type PortariaScalarFieldEnum = (typeof PortariaScalarFieldEnum)[keyof typeof PortariaScalarFieldEnum]
@@ -2856,25 +3118,20 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-  export const PortariaOrderByRelevanceFieldEnum: {
-    nome: 'nome',
-    portaria: 'portaria',
-    cpf: 'cpf',
-    cargo: 'cargo',
-    simbolo: 'simbolo',
-    secretaria: 'secretaria'
+  export const QueryMode: {
+    default: 'default',
+    insensitive: 'insensitive'
   };
 
-  export type PortariaOrderByRelevanceFieldEnum = (typeof PortariaOrderByRelevanceFieldEnum)[keyof typeof PortariaOrderByRelevanceFieldEnum]
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-  export const UsersOrderByRelevanceFieldEnum: {
-    nome: 'nome',
-    cpf: 'cpf',
-    password: 'password'
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
   };
 
-  export type UsersOrderByRelevanceFieldEnum = (typeof UsersOrderByRelevanceFieldEnum)[keyof typeof UsersOrderByRelevanceFieldEnum]
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -2890,9 +3147,23 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'String[]'
+   */
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
     
 
 
@@ -2904,9 +3175,23 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -2918,27 +3203,28 @@ export namespace Prisma {
     OR?: PortariaWhereInput[]
     NOT?: PortariaWhereInput | PortariaWhereInput[]
     id?: IntFilter<"Portaria"> | number
-    nome?: StringFilter<"Portaria"> | string
-    portaria?: StringFilter<"Portaria"> | string
-    cpf?: StringFilter<"Portaria"> | string
-    cargo?: StringFilter<"Portaria"> | string
-    simbolo?: StringFilter<"Portaria"> | string
-    secretaria?: StringFilter<"Portaria"> | string
-    nomeacao?: DateTimeFilter<"Portaria"> | Date | string
-    data?: DateTimeFilter<"Portaria"> | Date | string
+    portaria?: StringNullableFilter<"Portaria"> | string | null
+    nome?: StringNullableFilter<"Portaria"> | string | null
+    cpf?: StringNullableFilter<"Portaria"> | string | null
+    cargo?: StringNullableFilter<"Portaria"> | string | null
+    simbolo?: StringNullableFilter<"Portaria"> | string | null
+    secretaria?: StringNullableFilter<"Portaria"> | string | null
+    tipoDocumento?: StringNullableFilter<"Portaria"> | string | null
+    data?: DateTimeNullableFilter<"Portaria"> | Date | string | null
+    dataNomeacao?: DateTimeNullableFilter<"Portaria"> | Date | string | null
   }
 
   export type PortariaOrderByWithRelationInput = {
     id?: SortOrder
-    nome?: SortOrder
-    portaria?: SortOrder
-    cpf?: SortOrder
-    cargo?: SortOrder
-    simbolo?: SortOrder
-    secretaria?: SortOrder
-    nomeacao?: SortOrder
-    data?: SortOrder
-    _relevance?: PortariaOrderByRelevanceInput
+    portaria?: SortOrderInput | SortOrder
+    nome?: SortOrderInput | SortOrder
+    cpf?: SortOrderInput | SortOrder
+    cargo?: SortOrderInput | SortOrder
+    simbolo?: SortOrderInput | SortOrder
+    secretaria?: SortOrderInput | SortOrder
+    tipoDocumento?: SortOrderInput | SortOrder
+    data?: SortOrderInput | SortOrder
+    dataNomeacao?: SortOrderInput | SortOrder
   }
 
   export type PortariaWhereUniqueInput = Prisma.AtLeast<{
@@ -2946,26 +3232,28 @@ export namespace Prisma {
     AND?: PortariaWhereInput | PortariaWhereInput[]
     OR?: PortariaWhereInput[]
     NOT?: PortariaWhereInput | PortariaWhereInput[]
-    nome?: StringFilter<"Portaria"> | string
-    portaria?: StringFilter<"Portaria"> | string
-    cpf?: StringFilter<"Portaria"> | string
-    cargo?: StringFilter<"Portaria"> | string
-    simbolo?: StringFilter<"Portaria"> | string
-    secretaria?: StringFilter<"Portaria"> | string
-    nomeacao?: DateTimeFilter<"Portaria"> | Date | string
-    data?: DateTimeFilter<"Portaria"> | Date | string
+    portaria?: StringNullableFilter<"Portaria"> | string | null
+    nome?: StringNullableFilter<"Portaria"> | string | null
+    cpf?: StringNullableFilter<"Portaria"> | string | null
+    cargo?: StringNullableFilter<"Portaria"> | string | null
+    simbolo?: StringNullableFilter<"Portaria"> | string | null
+    secretaria?: StringNullableFilter<"Portaria"> | string | null
+    tipoDocumento?: StringNullableFilter<"Portaria"> | string | null
+    data?: DateTimeNullableFilter<"Portaria"> | Date | string | null
+    dataNomeacao?: DateTimeNullableFilter<"Portaria"> | Date | string | null
   }, "id">
 
   export type PortariaOrderByWithAggregationInput = {
     id?: SortOrder
-    nome?: SortOrder
-    portaria?: SortOrder
-    cpf?: SortOrder
-    cargo?: SortOrder
-    simbolo?: SortOrder
-    secretaria?: SortOrder
-    nomeacao?: SortOrder
-    data?: SortOrder
+    portaria?: SortOrderInput | SortOrder
+    nome?: SortOrderInput | SortOrder
+    cpf?: SortOrderInput | SortOrder
+    cargo?: SortOrderInput | SortOrder
+    simbolo?: SortOrderInput | SortOrder
+    secretaria?: SortOrderInput | SortOrder
+    tipoDocumento?: SortOrderInput | SortOrder
+    data?: SortOrderInput | SortOrder
+    dataNomeacao?: SortOrderInput | SortOrder
     _count?: PortariaCountOrderByAggregateInput
     _avg?: PortariaAvgOrderByAggregateInput
     _max?: PortariaMaxOrderByAggregateInput
@@ -2978,14 +3266,15 @@ export namespace Prisma {
     OR?: PortariaScalarWhereWithAggregatesInput[]
     NOT?: PortariaScalarWhereWithAggregatesInput | PortariaScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Portaria"> | number
-    nome?: StringWithAggregatesFilter<"Portaria"> | string
-    portaria?: StringWithAggregatesFilter<"Portaria"> | string
-    cpf?: StringWithAggregatesFilter<"Portaria"> | string
-    cargo?: StringWithAggregatesFilter<"Portaria"> | string
-    simbolo?: StringWithAggregatesFilter<"Portaria"> | string
-    secretaria?: StringWithAggregatesFilter<"Portaria"> | string
-    nomeacao?: DateTimeWithAggregatesFilter<"Portaria"> | Date | string
-    data?: DateTimeWithAggregatesFilter<"Portaria"> | Date | string
+    portaria?: StringNullableWithAggregatesFilter<"Portaria"> | string | null
+    nome?: StringNullableWithAggregatesFilter<"Portaria"> | string | null
+    cpf?: StringNullableWithAggregatesFilter<"Portaria"> | string | null
+    cargo?: StringNullableWithAggregatesFilter<"Portaria"> | string | null
+    simbolo?: StringNullableWithAggregatesFilter<"Portaria"> | string | null
+    secretaria?: StringNullableWithAggregatesFilter<"Portaria"> | string | null
+    tipoDocumento?: StringNullableWithAggregatesFilter<"Portaria"> | string | null
+    data?: DateTimeNullableWithAggregatesFilter<"Portaria"> | Date | string | null
+    dataNomeacao?: DateTimeNullableWithAggregatesFilter<"Portaria"> | Date | string | null
   }
 
   export type UsersWhereInput = {
@@ -3003,7 +3292,6 @@ export namespace Prisma {
     nome?: SortOrder
     cpf?: SortOrder
     password?: SortOrder
-    _relevance?: UsersOrderByRelevanceInput
   }
 
   export type UsersWhereUniqueInput = Prisma.AtLeast<{
@@ -3039,84 +3327,91 @@ export namespace Prisma {
   }
 
   export type PortariaCreateInput = {
-    nome: string
-    portaria: string
-    cpf: string
-    cargo: string
-    simbolo: string
-    secretaria: string
-    nomeacao: Date | string
-    data: Date | string
+    portaria?: string | null
+    nome?: string | null
+    cpf?: string | null
+    cargo?: string | null
+    simbolo?: string | null
+    secretaria?: string | null
+    tipoDocumento?: string | null
+    data?: Date | string | null
+    dataNomeacao?: Date | string | null
   }
 
   export type PortariaUncheckedCreateInput = {
     id?: number
-    nome: string
-    portaria: string
-    cpf: string
-    cargo: string
-    simbolo: string
-    secretaria: string
-    nomeacao: Date | string
-    data: Date | string
+    portaria?: string | null
+    nome?: string | null
+    cpf?: string | null
+    cargo?: string | null
+    simbolo?: string | null
+    secretaria?: string | null
+    tipoDocumento?: string | null
+    data?: Date | string | null
+    dataNomeacao?: Date | string | null
   }
 
   export type PortariaUpdateInput = {
-    nome?: StringFieldUpdateOperationsInput | string
-    portaria?: StringFieldUpdateOperationsInput | string
-    cpf?: StringFieldUpdateOperationsInput | string
-    cargo?: StringFieldUpdateOperationsInput | string
-    simbolo?: StringFieldUpdateOperationsInput | string
-    secretaria?: StringFieldUpdateOperationsInput | string
-    nomeacao?: DateTimeFieldUpdateOperationsInput | Date | string
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    portaria?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    cargo?: NullableStringFieldUpdateOperationsInput | string | null
+    simbolo?: NullableStringFieldUpdateOperationsInput | string | null
+    secretaria?: NullableStringFieldUpdateOperationsInput | string | null
+    tipoDocumento?: NullableStringFieldUpdateOperationsInput | string | null
+    data?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataNomeacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PortariaUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nome?: StringFieldUpdateOperationsInput | string
-    portaria?: StringFieldUpdateOperationsInput | string
-    cpf?: StringFieldUpdateOperationsInput | string
-    cargo?: StringFieldUpdateOperationsInput | string
-    simbolo?: StringFieldUpdateOperationsInput | string
-    secretaria?: StringFieldUpdateOperationsInput | string
-    nomeacao?: DateTimeFieldUpdateOperationsInput | Date | string
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    portaria?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    cargo?: NullableStringFieldUpdateOperationsInput | string | null
+    simbolo?: NullableStringFieldUpdateOperationsInput | string | null
+    secretaria?: NullableStringFieldUpdateOperationsInput | string | null
+    tipoDocumento?: NullableStringFieldUpdateOperationsInput | string | null
+    data?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataNomeacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PortariaCreateManyInput = {
     id?: number
-    nome: string
-    portaria: string
-    cpf: string
-    cargo: string
-    simbolo: string
-    secretaria: string
-    nomeacao: Date | string
-    data: Date | string
+    portaria?: string | null
+    nome?: string | null
+    cpf?: string | null
+    cargo?: string | null
+    simbolo?: string | null
+    secretaria?: string | null
+    tipoDocumento?: string | null
+    data?: Date | string | null
+    dataNomeacao?: Date | string | null
   }
 
   export type PortariaUpdateManyMutationInput = {
-    nome?: StringFieldUpdateOperationsInput | string
-    portaria?: StringFieldUpdateOperationsInput | string
-    cpf?: StringFieldUpdateOperationsInput | string
-    cargo?: StringFieldUpdateOperationsInput | string
-    simbolo?: StringFieldUpdateOperationsInput | string
-    secretaria?: StringFieldUpdateOperationsInput | string
-    nomeacao?: DateTimeFieldUpdateOperationsInput | Date | string
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    portaria?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    cargo?: NullableStringFieldUpdateOperationsInput | string | null
+    simbolo?: NullableStringFieldUpdateOperationsInput | string | null
+    secretaria?: NullableStringFieldUpdateOperationsInput | string | null
+    tipoDocumento?: NullableStringFieldUpdateOperationsInput | string | null
+    data?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataNomeacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PortariaUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nome?: StringFieldUpdateOperationsInput | string
-    portaria?: StringFieldUpdateOperationsInput | string
-    cpf?: StringFieldUpdateOperationsInput | string
-    cargo?: StringFieldUpdateOperationsInput | string
-    simbolo?: StringFieldUpdateOperationsInput | string
-    secretaria?: StringFieldUpdateOperationsInput | string
-    nomeacao?: DateTimeFieldUpdateOperationsInput | Date | string
-    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    portaria?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    cargo?: NullableStringFieldUpdateOperationsInput | string | null
+    simbolo?: NullableStringFieldUpdateOperationsInput | string | null
+    secretaria?: NullableStringFieldUpdateOperationsInput | string | null
+    tipoDocumento?: NullableStringFieldUpdateOperationsInput | string | null
+    data?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataNomeacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UsersCreateInput = {
@@ -3167,8 +3462,8 @@ export namespace Prisma {
 
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -3176,10 +3471,10 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type StringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -3187,37 +3482,37 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringFilter<$PrismaModel> | string
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type PortariaOrderByRelevanceInput = {
-    fields: PortariaOrderByRelevanceFieldEnum | PortariaOrderByRelevanceFieldEnum[]
+  export type SortOrderInput = {
     sort: SortOrder
-    search: string
+    nulls?: NullsOrder
   }
 
   export type PortariaCountOrderByAggregateInput = {
     id?: SortOrder
-    nome?: SortOrder
     portaria?: SortOrder
+    nome?: SortOrder
     cpf?: SortOrder
     cargo?: SortOrder
     simbolo?: SortOrder
     secretaria?: SortOrder
-    nomeacao?: SortOrder
+    tipoDocumento?: SortOrder
     data?: SortOrder
+    dataNomeacao?: SortOrder
   }
 
   export type PortariaAvgOrderByAggregateInput = {
@@ -3226,26 +3521,28 @@ export namespace Prisma {
 
   export type PortariaMaxOrderByAggregateInput = {
     id?: SortOrder
-    nome?: SortOrder
     portaria?: SortOrder
+    nome?: SortOrder
     cpf?: SortOrder
     cargo?: SortOrder
     simbolo?: SortOrder
     secretaria?: SortOrder
-    nomeacao?: SortOrder
+    tipoDocumento?: SortOrder
     data?: SortOrder
+    dataNomeacao?: SortOrder
   }
 
   export type PortariaMinOrderByAggregateInput = {
     id?: SortOrder
-    nome?: SortOrder
     portaria?: SortOrder
+    nome?: SortOrder
     cpf?: SortOrder
     cargo?: SortOrder
     simbolo?: SortOrder
     secretaria?: SortOrder
-    nomeacao?: SortOrder
+    tipoDocumento?: SortOrder
     data?: SortOrder
+    dataNomeacao?: SortOrder
   }
 
   export type PortariaSumOrderByAggregateInput = {
@@ -3254,8 +3551,8 @@ export namespace Prisma {
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -3268,10 +3565,10 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -3279,31 +3576,40 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type UsersOrderByRelevanceInput = {
-    fields: UsersOrderByRelevanceFieldEnum | UsersOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type UsersCountOrderByAggregateInput = {
@@ -3335,12 +3641,30 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -3351,10 +3675,14 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -3362,10 +3690,10 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedStringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -3373,25 +3701,24 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringFilter<$PrismaModel> | string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -3406,8 +3733,8 @@ export namespace Prisma {
 
   export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -3415,10 +3742,10 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -3426,25 +3753,66 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
   }
 
 

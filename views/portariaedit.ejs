@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Portaria</title>
+  <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <!-- Formulário -->
+    <div class="form-container">
+      <h2>Editar Portaria</h2>
+      <form id="formulario">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" value="<%= portaria.nome %>" required />
+
+        <label for="portaria">Portaria:</label>
+        <input type="text" id="portaria" value="<%= portaria.portaria %>" placeholder="Ex: 1272" required />
+
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" value="<%= portaria.cpf %>" placeholder="000.000.000-00" maxlength="14" required />
+
+        <label for="cargo">Cargo:</label>
+        <input type="text" id="cargo" value="<%= portaria.cargo %>" placeholder="Ex: Assessor III" required />
+
+        <label for="simbolo">Símbolo:</label>
+        <input type="text" id="simbolo" value="<%= portaria.simbolo %>" placeholder="Ex: CC8" required />
+
+        <label for="secretaria">Secretaria:</label>
+        <select id="secretaria" required>
+          <option value="" disabled>SELECIONE UMA SECRETARIA</option>
+          <option value="CONTROLADORIA GERAL" <%= portaria.secretaria === 'CONTROLADORIA GERAL' ? 'selected' : '' %>>CONTROLADORIA GERAL</option>
+          <option value="GABINETE DO PREFEITO" <%= portaria.secretaria === 'GABINETE DO PREFEITO' ? 'selected' : '' %>>GABINETE DO PREFEITO</option>
+          <option value="GABINETE DO VICE-PREFEITO" <%= portaria.secretaria === 'GABINETE DO VICE-PREFEITO' ? 'selected' : '' %>>GABINETE DO VICE-PREFEITO</option>
+          <option value="OUVIDORIA GERAL" <%= portaria.secretaria === 'OUVIDORIA GERAL' ? 'selected' : '' %>>OUVIDORIA GERAL</option>
+          <option value="PREVIDÊNCIA MUNICIPAL" <%= portaria.secretaria === 'PREVIDÊNCIA MUNICIPAL' ? 'selected' : '' %>>PREVIDÊNCIA MUNICIPAL</option>
+          <option value="PROCURADORIA GERAL" <%= portaria.secretaria === 'PROCURADORIA GERAL' ? 'selected' : '' %>>PROCURADORIA GERAL</option>
+          <option value="SECRETARIA DE ADMINISTRAÇÃO" <%= portaria.secretaria === 'SECRETARIA DE ADMINISTRAÇÃO' ? 'selected' : '' %>>SECRETARIA DE ADMINISTRAÇÃO</option>
+          <option value="SECRETARIA DE ADMINISTRAÇÃO DAS REGIONAIS" <%= portaria.secretaria === 'SECRETARIA DE ADMINISTRAÇÃO DAS REGIONAIS' ? 'selected' : '' %>>SECRETARIA DE ADMINISTRAÇÃO DAS REGIONAIS</option>
+          <option value="SECRETARIA DE ASSUNTOS JURÍDICOS" <%= portaria.secretaria === 'SECRETARIA DE ASSUNTOS JURÍDICOS' ? 'selected' : '' %>>SECRETARIA DE ASSUNTOS JURÍDICOS</option>
+          <option value="SECRETARIA DE DESENVOLVIMENTO ECONÔMICO, AGROPECUÁRIA E PESCA" <%= portaria.secretaria === 'SECRETARIA DE DESENVOLVIMENTO ECONÔMICO, AGROPECUÁRIA E PESCA' ? 'selected' : '' %>>SECRETARIA DE DESENVOLVIMENTO ECONÔMICO, AGROPECUÁRIA E PESCA</option>
+          <option value="SECRETARIA DE DESENVOLVIMENTO URBANO, TECNOLOGIA" <%= portaria.secretaria === 'SECRETARIA DE DESENVOLVIMENTO URBANO, TECNOLOGIA' ? 'selected' : '' %>>SECRETARIA DE DESENVOLVIMENTO URBANO, TECNOLOGIA</option>
+          <option value="SECRETARIA DE MEIO AMBIENTE" <%= portaria.secretaria === 'SECRETARIA DE MEIO AMBIENTE' ? 'selected' : '' %>>SECRETARIA DE MEIO AMBIENTE</option>
+          <option value="SECRETARIA DE EDUCAÇÃO" <%= portaria.secretaria === 'SECRETARIA DE EDUCAÇÃO' ? 'selected' : '' %>>SECRETARIA DE EDUCAÇÃO</option>
+          <option value="SECRETARIA DE FINANÇAS" <%= portaria.secretaria === 'SECRETARIA DE FINANÇAS' ? 'selected' : '' %>>SECRETARIA DE FINANÇAS</option>
+          <option value="SECRETARIA DE GOVERNO E GABINETE" <%= portaria.secretaria === 'SECRETARIA DE GOVERNO E GABINETE' ? 'selected' : '' %>>SECRETARIA DE GOVERNO E GABINETE</option>
+          <option value="SECRETARIA DE HABITAÇÃO" <%= portaria.secretaria === 'SECRETARIA DE HABITAÇÃO' ? 'selected' : '' %>>SECRETARIA DE HABITAÇÃO</option>
+          <option value="SECRETARIA DE INFRAESTRUTURA" <%= portaria.secretaria === 'SECRETARIA DE INFRAESTRUTURA' ? 'selected' : '' %>>SECRETARIA DE INFRAESTRUTURA</option>
+          <option value="SECRETARIA DE LICITAÇÕES E CONTRATOS" <%= portaria.secretaria === 'SECRETARIA DE LICITAÇÕES E CONTRATOS' ? 'selected' : '' %>>SECRETARIA DE LICITAÇÕES E CONTRATOS</option>
+          <option value="SECRETARIA DE OBRAS E SERVIÇOS PÚBLICOS" <%= portaria.secretaria === 'SECRETARIA DE OBRAS E SERVIÇOS PÚBLICOS' ? 'selected' : '' %>>SECRETARIA DE OBRAS E SERVIÇOS PÚBLICOS</option>
+          <option value="SECRETARIA DE PLANEJAMENTO E GESTÃO" <%= portaria.secretaria === 'SECRETARIA DE PLANEJAMENTO E GESTÃO' ? 'selected' : '' %>>SECRETARIA DE PLANEJAMENTO E GESTÃO</option>
+          <option value="SECRETARIA DE POLÍTICAS SOCIAIS E DIREITOS HUMANOS" <%= portaria.secretaria === 'SECRETARIA DE POLÍTICAS SOCIAIS E DIREITOS HUMANOS' ? 'selected' : '' %>>SECRETARIA DE POLÍTICAS SOCIAIS E DIREITOS HUMANOS</option>
+          <option value="SECRETARIA DE PROJETOS ESPECIAIS" <%= portaria.secretaria === 'SECRETARIA DE PROJETOS ESPECIAIS' ? 'selected' : '' %>>SECRETARIA DE PROJETOS ESPECIAIS</option>
+          <option value="SECRETARIA DE SAÚDE" <%= portaria.secretaria === 'SECRETARIA DE SAÚDE' ? 'selected' : '' %>>SECRETARIA DE SAÚDE</option>
+          <option value="SECRETARIA DE SEGURANÇA, MOBILIDADE E DEFESA CIVIL" <%= portaria.secretaria === 'SECRETARIA DE SEGURANÇA, MOBILIDADE E DEFESA CIVIL' ? 'selected' : '' %>>SECRETARIA DE SEGURANÇA, MOBILIDADE E DEFESA CIVIL</option>
+          <option value="SECRETARIA EXECUTIVA DE COMUNICAÇÃO" <%= portaria.secretaria === 'SECRETARIA EXECUTIVA DE COMUNICAÇÃO' ? 'selected' : '' %>>SECRETARIA EXECUTIVA DE COMUNICAÇÃO</option>
+          <option value="SECRETARIA EXECUTIVA DE GABINETE" <%= portaria.secretaria === 'SECRETARIA EXECUTIVA DE GABINETE' ? 'selected' : '' %>>SECRETARIA EXECUTIVA DE GABINETE</option>
+          <option value="SECRETARIA EXECUTIVA DE IMPRENSA" <%= portaria.secretaria === 'SECRETARIA EXECUTIVA DE IMPRENSA' ? 'selected' : '' %>>SECRETARIA EXECUTIVA DE IMPRENSA</option>
+          <option value="SECRETARIA EXECUTIVA DE POLÍTICAS PARA AS MULHERES" <%= portaria.secretaria === 'SECRETARIA EXECUTIVA DE POLÍTICAS PARA AS MULHERES' ? 'selected' : '' %>>SECRETARIA EXECUTIVA DE POLÍTICAS PARA AS MULHERES</option>
+        </select>
+
+        <label for="tipoDocumento">Tipo de Documento:</label>
+        <select id="tipoDocumento" required>
+          <option value="NOMEAR" <%= portaria.tipoDocumento === 'NOMEAR' ? 'selected' : '' %>>NOMEAR</option>
+          <option value="EXONERAR" <%= portaria.tipoDocumento === 'EXONERAR' ? 'selected' : '' %>>EXONERAR</option>
+        </select>
+
+        <label for="data-1">Data (Rodapé):</label>
+        <input type="date" id="data-1" value="<%= portaria.data.toISOString().split('T')[0] %>" required />
+
+        <label for="data-nomeacao">Data (Nomeação):</label>
+        <input type="date" id="data-nomeacao" name="data-nomeacao" value="<%= portaria.dataNomeacao.toISOString().split('T')[0] %>" required />
+        
+        
+        <button type="button" onclick="enviarPortaria()">Salvar e Baixar DOCX</button>
+        <a href="/service"><button type="button">Voltar para o menu</button></a>
+      </form>
+      
+      <br>
+      <label>Usuário:</label>
+       <input id="usuario"  type="password" placeholder="Digite seu usuario">
+       <br>
+       <label>Senha:</label>
+      <input id="senha"  type="password" placeholder="Digite sua senha">
+    </div>
+    
+    <!-- Prévia -->
+    <div class="preview-container" id="preview">
+      <img src="/img/pref.png" alt="Logo da Prefeitura" class="logo-prefeitura" />
+
+      <p class="center titulo-gabinete"><strong><u>SECRETARIA DE GOVERNO E GABINETE</u></strong></p>
+      <p class="center"><strong>PORTARIA Nº <span id="p-portaria"><%= portaria.portaria.padStart(4, '0') %>/<%= portaria.data.toISOString().split('T')[0].split('-')[0] %></span></strong></p>
+
+      <p>
+        <strong>         O PREFEITO DO MUNICÍPIO DO PAULISTA – ESTADO DE PERNAMBUCO </strong>,
+        no uso das atribuições institucionais que lhe são conferidas em função do cargo e com amparo nos
+        preceitos contidos na Lei Orgânica do Município,
+      </p>
+
+      <p class="center"><strong>R E S O L V E:</strong></p>
+
+      <% 
+        // Formatar dataNomeacao no EJS
+        const dataNomeacao = portaria.dataNomeacao.toISOString().split('T')[0];
+        const [anoNomeacao, mesNomeacao, diaNomeacao] = dataNomeacao.split('-');
+        const meses = [
+          'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+          'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+        ];
+        const mesNomeacaoNome = meses[parseInt(mesNomeacao) - 1];
+        const dataNomeacaoFormatada = `${diaNomeacao} de ${mesNomeacaoNome} de ${anoNomeacao}`;
+        
+        // Formatar data (rodapé) no EJS
+        const dataRodape = portaria.data.toISOString().split('T')[0];
+        const [anoRodape, mesRodape, diaRodape] = dataRodape.split('-');
+        const mesRodapeNome = meses[parseInt(mesRodape) - 1];
+        const dataRodapeFormatada = `Paulista, ${diaRodape} de ${mesRodapeNome} de ${anoRodape}`;
+      %>
+
+      <p>
+        <strong>         <span id="p-tipoDocumento"><%= portaria.tipoDocumento %></span></strong> o(a) Sr(a). <strong><span id="p-nome"><%= portaria.nome %></span></strong>
+        sob o CPF nº <span id="p-cpf"><%= portaria.cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, 'xxx.$2.xxx-$4') %></span>, para o exercício do cargo de provimento em comissão de
+        <strong><span id="p-cargo"><%= portaria.cargo %></span></strong>, símbolo “<strong><span id="p-simbolo"><%= portaria.simbolo %></span></strong>”,
+        lotado na <strong><span id="p-secretaria"><%= portaria.secretaria %></span></strong>,
+        a partir da presente data <span id="p-data-nomeacao"><%= dataNomeacaoFormatada %></span>.
+      </p>
+
+      <p class="center">Registra-se</p>
+      <p class="center">Publique-se</p>
+      <p class="center" id="p-data"><%= dataRodapeFormatada %></p>
+
+      <p class="center">
+        <strong>SEVERINO RAMOS DE SANTANA<br /><br />Prefeito</strong>
+      </p>
+
+      <div class="rodape">
+        <hr />
+        <p class="rodape-texto">
+          Praça Agamenon Magalhães, s/nº - Centro – Paulista – PE<br />
+          CNPJ: 10.408.839/0001-17
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function mascararCPF(cpf) {
+      cpf = cpf.replace(/\D/g, '');
+      if (cpf.length !== 11) return 'CPF INVÁLIDO';
+      return cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, 'xxx.$2.xxx-$4');
+    }
+
+    function formatarDataNomeacao(dataInput) {
+      if (!dataInput) return 'DATA INVÁLIDA';
+      const [ano, mes, dia] = dataInput.split('-');
+      const meses = [
+        'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+        'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+      ];
+      const mesNome = meses[parseInt(mes) - 1];
+      return `${dia} de ${mesNome} de ${ano}`;
+    }
+
+    function formatarDataPrevia(dataInput) {
+      if (!dataInput) return 'DATA INVÁLIDA';
+      const [ano, mes, dia] = dataInput.split('-');
+      const meses = [
+        'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+        'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+      ];
+      const mesNome = meses[parseInt(mes) - 1];
+      return `Paulista, ${dia} de ${mesNome} de ${ano}`;
+    }
+
+    function atualizarDataPrevia(dataInput) {
+      if (!dataInput) return;
+      const [ano, mes, dia] = dataInput.split('-');
+      const meses = [
+        'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+        'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+      ];
+      const mesNome = meses[parseInt(mes) - 1];
+      document.getElementById('p-data').textContent = `Paulista, ${dia} de ${mesNome} de ${ano}`;
+      const portaria = document.getElementById('portaria').value || '0000';
+      document.getElementById('p-portaria').textContent = `${portaria.padStart(4, '0')}/${ano}`;
+    }
+
+    async function enviarPortaria() {
+      const nomeElement = document.getElementById('nome');
+      const portariaElement = document.getElementById('portaria');
+      const cpfElement = document.getElementById('cpf');
+      const cargoElement = document.getElementById('cargo');
+      const simboloElement = document.getElementById('simbolo');
+      const secretariaElement = document.getElementById('secretaria');
+      const tipoDocumentoElement = document.getElementById('tipoDocumento');
+      const dataElement = document.getElementById('data-1');
+      const dataNomeacaoElement = document.getElementById('data-nomeacao');
+
+      if (!nomeElement || !portariaElement || !cpfElement || !cargoElement || !simboloElement ||
+          !secretariaElement || !tipoDocumentoElement || !dataElement || !dataNomeacaoElement) {
+        alert('Um ou mais campos do formulário não foram encontrados!');
+        return;
+      }
+
+      const formData = {
+        nome: nomeElement.value,
+        portaria: portariaElement.value,
+        cpf: cpfElement.value.replace(/\D/g, ''),
+        cargo: cargoElement.value,
+        simbolo: simboloElement.value,
+        secretaria: secretariaElement.value,
+        tipoDocumento: tipoDocumentoElement.value,
+        data: dataElement.value,
+        dataNomeacao: dataNomeacaoElement.value,
+      };
+
+
+  const resposta = confirm("Deseja registrar no banco de dados e baixar o documento mesmo assim?");
+  if (!resposta) return;
+
+  const user = document.getElementById("usuario").value;
+  const password = document.getElementById("senha").value;
+  
+  if (!user || !password) {
+    alert("CPF e senha são obrigatórios para continuar.");
+    return;
+  }
+
+  const result = await superuser(user, password, formData);
+
+  // Se houver erro, exibe e encerra
+  if (!result || result.error) {
+    console.log(`Erro: ${result?.error || "Falha ao autenticar usuário."}`);
+    return;
+  }
+    }
+
+    async function superuser(user, password, portariaData) {
+      try {
+        const response = await fetch(`/portariaauth/<%= portaria.id %>`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user,
+            password,
+            ...portariaData
+          }),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          alert("Portaria atualizada com sucesso!");
+          gerarDocx();
+        } else {
+          alert("Erro: " + result.error);
+        }
+      } catch (error) {
+        console.log("Erro na requisição: " + error.message);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const inputData = document.getElementById('data-1');
+      const inputDataNomeacao = document.getElementById('data-nomeacao');
+      const inputPortaria = document.getElementById('portaria');
+      const inputCpf = document.getElementById('cpf');
+      const inputTipoDocumento = document.getElementById('tipoDocumento');
+
+      // Atualiza a prévia com os valores iniciais
+      document.getElementById('p-cpf').textContent = mascararCPF(inputCpf.value);
+      document.getElementById('p-tipoDocumento').textContent = inputTipoDocumento.value;
+      document.getElementById('p-data-nomeacao').textContent = formatarDataNomeacao(inputDataNomeacao.value);
+      atualizarDataPrevia(inputData.value);
+      inputPortaria.dispatchEvent(new Event('input'));
+    });
+
+    const campos = ['nome', 'cpf', 'cargo', 'simbolo', 'secretaria', 'portaria', 'tipoDocumento', 'data-1', 'data-nomeacao'];
+    campos.forEach((id) => {
+      document.getElementById(id).addEventListener('input', function () {
+        const valor = this.value || (id === 'portaria' ? '0000' : id.toUpperCase());
+        if (id === 'cpf') {
+          document.getElementById('p-cpf').textContent = mascararCPF(valor);
+        } else if (id === 'data-1') {
+          atualizarDataPrevia(valor);
+        } else if (id === 'data-nomeacao') {
+          document.getElementById('p-data-nomeacao'). gruesomeTextContent = formatarDataNomeacao(valor);
+        } else if (id === 'tipoDocumento') {
+          document.getElementById('p-tipoDocumento').textContent = valor;
+        } else if (id === 'portaria') {
+          const ano = document.getElementById('data-1').value.split('-')[0] || '2025';
+          document.getElementById('p-portaria').textContent = `${valor.padStart(4, '0')}/${ano}`;
+        } else {
+          document.getElementById('p-' + id).textContent = valor;
+        }
+      });
+    });
+
+    async function gerarDocx() {
+      const { Document, Packer, Paragraph, TextRun, AlignmentType, ImageRun, Border, Table, TableRow, TableCell, WidthType, Footer } = docx;
+
+      const nome = document.getElementById('nome').value || 'documento';
+      const portaria = document.getElementById('p-portaria').textContent;
+      const cpf = document.getElementById('p-cpf').textContent;
+      const cargo = document.getElementById('p-cargo').textContent;
+      const simbolo = document.getElementById('p-simbolo').textContent;
+      const secretaria = document.getElementById('p-secretaria').textContent;
+      const tipoDocumento = document.getElementById('p-tipoDocumento').textContent;
+      const data = document.getElementById('p-data').textContent;
+      const dataNomeacao = document.getElementById('p-data-nomeacao').textContent;
+
+      const topMargin = 3 * 567;
+      const leftMargin = 3 * 567;
+      const bottomMargin = 2 * 567;
+      const rightMargin = 2 * 567;
+
+      async function getImageArrayBuffer(url) {
+        try {
+          const response = await fetch(url);
+          if (!response.ok) throw new Error('Failed to fetch image');
+          return await response.arrayBuffer();
+        } catch (error) {
+          console.warn('Image fetch failed, skipping logo:', error);
+          return null;
+        }
+      }
+
+      const imageBuffer = await getImageArrayBuffer('/img/pref.png');
+
+      const doc = new Document({
+        sections: [{
+          properties: {
+            page: {
+              size: {
+                width: 595.3 * 20,
+                height: 841.9 * 20,
+              },
+              margin: {
+                top: topMargin,
+                bottom: bottomMargin,
+                left: leftMargin,
+                right: rightMargin,
+              },
+            },
+          },
+          footers: {
+            default: new Footer({
+              children: [
+                new Table({
+                  rows: [
+                    new TableRow({
+                      children: [
+                        new TableCell({
+                          children: [],
+                          borders: {
+                            top: { style: Border.SINGLE, size: 4, color: '000000' },
+                            bottom: { style: Border.NIL },
+                            left: { style: Border.NIL },
+                            right: { style: Border.NIL },
+                          },
+                        }),
+                      ],
+                    }),
+                  ],
+                  width: {
+                    size: 100,
+                    type: WidthType.PERCENTAGE,
+                  },
+                }),
+                new Paragraph({
+                  alignment: AlignmentType.CENTER,
+                  children: [
+                    new TextRun({
+                      text: "Praça Agamenon Magalhães, s/nº - Centro – Paulista – PE",
+                      font: { name: 'Times New Roman' },
+                      size: 20,
+                    }),
+                  ],
+                  spacing: { after: 50 },
+                }),
+                new Paragraph({
+                  alignment: AlignmentType.CENTER,
+                  children: [
+                    new TextRun({
+                      text: "CNPJ: 10.408.839/0001-17",
+                      font: { name: 'Times New Roman' },
+                      size: 20,
+                    }),
+                  ],
+                }),
+              ],
+            }),
+          },
+          children: [
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                imageBuffer ? new ImageRun({
+                  data: imageBuffer,
+                  transformation: {
+                    width: 100,
+                    height: 100,
+                  },
+                }) : new TextRun({ text: "" }),
+              ],
+              spacing: { after: 200 },
+            }),
+            new Paragraph({}),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun({
+                  text: "SECRETARIA DE GOVERNO E GABINETE",
+                  bold: true,
+                  underline: { type: 'single' },
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+              ],
+              spacing: { after: 200 },
+            }),
+            new Paragraph({}),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun({
+                  text: `PORTARIA Nº ${portaria}`,
+                  bold: true,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+              ],
+              spacing: { after: 200 },
+            }),
+            new Paragraph({}),
+            new Paragraph({
+              alignment: AlignmentType.JUSTIFIED,
+              indent: { left: 720 },
+              children: [
+                new TextRun({
+                  text: "\tO PREFEITO DO MUNICÍPIO DO PAULISTA – ESTADO DE PERNAMBUCO ",
+                  bold: true,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+                new TextRun({
+                  text: "no uso das atribuições institucionais que lhe são conferidas em função do cargo e com amparo nos preceitos contidos na Lei Orgânica do Município,",
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+              ],
+              spacing: { after: 200 },
+            }),
+            new Paragraph({}),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun({
+                  text: "R E S O L V E:",
+                  bold: true,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+              ],
+              spacing: { after: 200 },
+            }),
+            new Paragraph({}),
+            new Paragraph({
+              alignment: AlignmentType.JUSTIFIED,
+              indent: { left: 720 },
+              children: [
+                new TextRun({
+                  text: `\t${tipoDocumento} `,
+                  bold: true,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+                new TextRun({
+                  text: `o(a) Sr(a). `,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+                new TextRun({
+                  text: nome.toUpperCase(),
+                  bold: true,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+                new TextRun({
+                  text: ` sob o CPF nº ${cpf}, para o exercício do cargo de provimento em comissão de `,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+                new TextRun({
+                  text: cargo.toUpperCase(),
+                  bold: true,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+                new TextRun({
+                  text: `, símbolo “`,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+                new TextRun({
+                  text: simbolo,
+                  bold: true,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+                new TextRun({
+                  text: `”, lotado na `,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+                new TextRun({
+                  text: secretaria.toUpperCase(),
+                  bold: true,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+                new TextRun({
+                  text: `, a partir da presente data ${dataNomeacao}.`,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+              ],
+              spacing: { after: 200 },
+            }),
+            new Paragraph({}),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun({
+                  text: "Registra-se",
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+              ],
+              spacing: { after: 100 },
+            }),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun({
+                  text: "Publique-se",
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+              ],
+              spacing: { after: 100 },
+            }),
+            new Paragraph({}),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun({
+                  text: data,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+              ],
+              spacing: { after: 200 },
+            }),
+            new Paragraph({}),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun({
+                  text: "SEVERINO RAMOS DE SANTANA",
+                  bold: true,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+              ],
+              spacing: { after: 100 },
+            }),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun({
+                  text: "Prefeito",
+                  bold: true,
+                  font: { name: 'Times New Roman' },
+                  size: 20,
+                }),
+              ],
+              spacing: { after: 200 },
+            }),
+          ],
+        }],
+      });
+
+      Packer.toBlob(doc).then((blob) => {
+        saveAs(blob, `portaria_${nome.replace(/\s+/g, '_').toLowerCase()}.docx`);
+      }).catch((error) => {
+        console.error('Erro ao gerar o documento Word:', error);
+        alert('Erro ao gerar o documento Word: ' + error.message);
+      });
+    }
+  </script>
+</body>
+
+</html>

@@ -122,14 +122,15 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.PortariaScalarFieldEnum = {
   id: 'id',
-  nome: 'nome',
   portaria: 'portaria',
+  nome: 'nome',
   cpf: 'cpf',
   cargo: 'cargo',
   simbolo: 'simbolo',
   secretaria: 'secretaria',
-  nomeacao: 'nomeacao',
-  data: 'data'
+  tipoDocumento: 'tipoDocumento',
+  data: 'data',
+  dataNomeacao: 'dataNomeacao'
 };
 
 exports.Prisma.UsersScalarFieldEnum = {
@@ -144,19 +145,14 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.PortariaOrderByRelevanceFieldEnum = {
-  nome: 'nome',
-  portaria: 'portaria',
-  cpf: 'cpf',
-  cargo: 'cargo',
-  simbolo: 'simbolo',
-  secretaria: 'secretaria'
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
-exports.Prisma.UsersOrderByRelevanceFieldEnum = {
-  nome: 'nome',
-  cpf: 'cpf',
-  password: 'password'
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 
